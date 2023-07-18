@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="anTroc.cpp" />
+    <ClCompile Include="DataGenerator.cpp" />
     <ClCompile Include="hieuHo.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pianoKiet.cpp" />
