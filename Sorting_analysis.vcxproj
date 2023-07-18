@@ -136,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="anTroc.h" />
+    <ClInclude Include="DataGenerator.h" />
     <ClInclude Include="hieuHo.h" />
     <ClInclude Include="pianoKiet.h" />
     <ClInclude Include="sonOfABeach.h" />

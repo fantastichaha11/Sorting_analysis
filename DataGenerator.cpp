@@ -1,4 +1,5 @@
-﻿#include <iostream>
+﻿#include "DataGenerator.h"
+#include <iostream>
 #include <fstream>
 #include <cmath>
 #include <time.h>
@@ -59,8 +60,12 @@ void GenerateNearlySortedData(int a[], int n)
 	}
 }
 
-void GenerateData(int a[], int n, int dataType)
+void GenerateData(int*& a, int n, int dataType)
 {
+	if(a != NULL)
+		delete[] a;
+	a = new int[n];
+
 	switch (dataType)
 	{
 	case 0:	// ngẫu nhiên
