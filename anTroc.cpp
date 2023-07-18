@@ -170,14 +170,42 @@ int partition_time(int arr[], int l, int r)
     swap(arr[i + 1], arr[r]);
     return (i + 1);
 }
+
 void quickSort_time(int* a, int l, int r)
 {
-    if (l >= r)
-        return;
+    // Create an auxiliary stack
+    int* stack = new int[r - l + 1];
 
-    int p = partition_time(a, l, r);
-    quickSort_time(a, l, p - 1);
-    quickSort_time(a, p + 1, r);
+    // initialize top of stack
+    int top = -1;
+
+    // push initial values of l and h to stack
+    stack[++top] = l;
+    stack[++top] = r;
+
+    // Keep popping from stack while is not empty
+    while (top >= 0) {
+        // Pop h and l
+        r = stack[top--];
+        l = stack[top--];
+
+        // Set pivot element at its correct position
+        // in sorted array
+        int p = partition_time(a, l, r);
+
+        // If there are elements on left side of pivot,
+        // then push left side to stack
+        if (p - 1 > l) {
+            stack[++top] = l;
+            stack[++top] = p - 1;
+        }
+
+        if (p + 1 < r) {
+            stack[++top] = p + 1;
+            stack[++top] = r;
+        }
+    }
+    delete[] stack;
 }
 void quickSort_countTime(int* a, int n, double& time)
 {
@@ -186,4 +214,11 @@ void quickSort_countTime(int* a, int n, double& time)
     quickSort_time(a, 0, n - 1);
     end = clock();
     time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+
+void swap(int* a, int* b)
+{
+    int t = *a;
+    *a = *b;
+    *b = t;
 }

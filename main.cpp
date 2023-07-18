@@ -12,7 +12,7 @@ using namespace std;
 int main()
 {
 	int* a = NULL;
-	int n = 10000;
+	int n = 500000;
 
 	GenerateData(a, n, 1);
 
@@ -20,5 +20,8 @@ int main()
 	quickSort_countTime(a, n, time);
 	cout << "Sort: " << time << endl;
 	system("pause");
+
+	if(a != NULL)
+		delete[] a;
 	return 0;
 }
