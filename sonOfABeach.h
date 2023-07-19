@@ -8,7 +8,11 @@ using namespace std;
 
 void selectionSort_countCompare(int* a, int n, long long& count_compare);
 void selectionSort_countTime(int* a, int n, double& time);
-void countingSort_countCompare(int* a, int n, int k, long long& count_compare);
-void countingSort_countTime(int* a, int n, int k, double& time);
+void countingSort_countCompare(int* a, int n, long long& count_compare);
+void countingSort_countTime(int* a, int n, double& time);
 void shellSort_countCompare(int* a, int n, long long& count_compare);
 void shellSort_countTime(int* a, int n, double& time);
+
+void selectionSort(int* a, int n, long long& count_compare, double& time, int typeCount);
+void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount);
+void shellSort(int* a, int n, long long& count_compare, double& time, int typeCount);
