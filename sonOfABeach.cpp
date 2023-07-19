@@ -42,9 +42,10 @@ void selectionSort_countTime(int* a, int n, double& time)
 }
 
 //Counting sort
-void countingSort_countCompare(int* a, int n, int k, long long& count_compare)
+void countingSort_countCompare(int* a, int n, long long& count_compare)
 {
 	count_compare = 0;
+	int k = 0;
 	for (int i = 0; ++count_compare && i < n; i++)
 	{
 		if (++count_compare && a[i] > k) k = a[i];
@@ -77,8 +78,9 @@ void countingSort_countCompare(int* a, int n, int k, long long& count_compare)
 	return;
 }
 
-void countingSort_countTime(int* a, int n, int k, double& time)
+void countingSort_countTime(int* a, int n, double& time)
 {
+	int k = 0;
 	clock_t start, end;
 	start = clock();
 
