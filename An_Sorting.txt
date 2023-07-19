@@ -8,3 +8,6 @@ Quick Sort:
 Heap Sort: 
 	Compare: 45970252
 	Time: 0.204
+Heap Sort: 
+	Compare: 45965811
+	Time: 0.194

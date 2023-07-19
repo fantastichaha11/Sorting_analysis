@@ -294,7 +294,7 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
         fp << "Quick Sort: " << endl;
     }
 
-    int count_compare = 0;
+    long long count_compare = 0;
     double time = 0;
     if (typeCount == COMPARE || typeCount == BOTH)
     {

@@ -29,7 +29,7 @@ void insertionSort_countTime(int* a, int n, double& time) {
 	end = clock();
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 }
-void shakerSort_countCompare(int* a, int n, int& count_compare) { //Ref: geeksforgeeks
+void shakerSort_countCompare(int* a, int n, long long& count_compare) { //Ref: geeksforgeeks
     count_compare = 0;
     bool swapped = true;
     int start = 0;
