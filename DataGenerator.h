@@ -9,6 +9,7 @@ void HoanVi(T& a, T& b);
 
 #define COMPARE 0
 #define TIME 1
+#define BOTH 2
 
 void GenerateRandomData(int a[], int n);
 void GenerateSortedData(int a[], int n);

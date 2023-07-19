@@ -1,4 +1,3 @@
-#include "pianoKiet.h"
 #include "DataGenerator.h"
 #include <iostream>
 #include <time.h>

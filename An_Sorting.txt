@@ -1,2 +1,10 @@
-Quick Sort: 	Compare: 28773022
-Quick Sort: Quick Sort: 	Time: 640.23
+Quick Sort: 
+	Time: 0.096
+Heap Sort: 
+	Time: 0.211
+Quick Sort: 
+	Compare: 1401697
+	Time: 0.093
+Heap Sort: 
+	Compare: 45970252
+	Time: 0.204

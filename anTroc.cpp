@@ -50,6 +50,17 @@ void bubbleSort_countTime(int* a, int n, double& time)
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
+void bubbleSort(int* a, int n, int& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        bubbleSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        bubbleSort_countTime(a, n, time);
+}
+
 //Heap sort
 void heapify_compare(int* a, int i, int n, int& count_compare)
 {
@@ -115,6 +126,17 @@ void heapSort_countTime(int* a, int n, double& time)
     }
     end = clock();
     time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+
+void heapSort(int* a, int n, int& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        heapSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        heapSort_countTime(a, n, time);
 }
 
 //Quick sort
@@ -203,28 +225,19 @@ int partition_time(int arr[], int l, int r)
 
 void quickSort_time(int* a, int l, int r)
 {
-    // Create an auxiliary stack
     int* stack = new int[r - l + 1];
 
-    // initialize top of stack
     int top = -1;
 
-    // push initial values of l and h to stack
     stack[++top] = l;
     stack[++top] = r;
 
-    // Keep popping from stack while is not empty
     while (top >= 0) {
-        // Pop h and l
         r = stack[top--];
         l = stack[top--];
-
-        // Set pivot element at its correct position
-        // in sorted array
+        
         int p = partition_time(a, l, r);
 
-        // If there are elements on left side of pivot,
-        // then push left side to stack
         if (p - 1 > l) {
             stack[++top] = l;
             stack[++top] = p - 1;
@@ -246,63 +259,56 @@ void quickSort_countTime(int* a, int n, double& time)
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
+void quickSort(int* a, int n, int& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if(typeCount == COMPARE || typeCount == BOTH)
+		quickSort_countCompare(a, n, count_compare);
+	if(typeCount == TIME || typeCount == BOTH)
+		quickSort_countTime(a, n, time);
+}
+
 void outputSort(int n, int typeData, int typeCount, int typeSort, string filename)
 {
     ofstream fp(filename, ios::app);
 
     int* a = NULL;
 
-    if(typeCount == TIME)
+    void (*sort) (int*, int, int&, double&, int) = NULL;
+
+    if(typeSort == B_SORT)
     {
-        void (*sort) (int*, int, double&) = NULL;
-
-        if(typeSort == B_SORT)
-        {
-            sort = bubbleSort_countTime;
-            fp << "Bubble Sort: ";
-        }
-		else if(typeSort == H_SORT)
-        {
-            sort = heapSort_countTime;
-            fp << "Heap Sort: ";
-        }
-		else if(typeSort == Q_SORT)
-        {
-            sort = quickSort_countTime;
-            fp << "Quick Sort: ";
-        }
-
-        GenerateData(a, n, typeData);
-        double time = 0;
-        sort(a, n, time);
-        fp << "\tTime: ";
-        fp << time << endl;
+        sort = bubbleSort;
+        fp << "Bubble Sort: " << endl;
     }
-    else if(typeCount == COMPARE)
+	else if(typeSort == H_SORT)
     {
-        void (*sort) (int*, int, int&) = NULL;
+        sort = heapSort;
+        fp << "Heap Sort: " << endl;
+    }
+	else if(typeSort == Q_SORT)
+    {
+        sort = quickSort;
+        fp << "Quick Sort: " << endl;
+    }
 
-        if(typeSort == B_SORT)
-        {
-            sort = bubbleSort_countCompare;
-            fp << "Bubble Sort: ";
-        }
-        else if(typeSort == H_SORT)
-        {
-            sort = heapSort_countCompare;
-            fp << "Heap Sort: ";
-        }
-		else if(typeSort == Q_SORT)
-        {
-            sort = quickSort_countCompare;
-            fp << "Quick Sort: ";
-        }
-
-        GenerateData(a, n, typeData);
-		int count_compare = 0;
-		sort(a, n, count_compare);
+    int count_compare = 0;
+    double time = 0;
+    if (typeCount == COMPARE || typeCount == BOTH)
+    {
         fp << "\tCompare: ";
-		fp << count_compare << endl;
+        GenerateData(a, n, typeData);
+        sort(a, n, count_compare, time, COMPARE);
+        fp << count_compare << endl;
+    }
+    if (typeCount == TIME || typeCount == BOTH)
+    {
+        fp << "\tTime: ";
+        GenerateData(a, n, typeData);
+        sort(a, n, count_compare, time, TIME);
+        fp << time << endl;
     }
 
     if(a != NULL)
