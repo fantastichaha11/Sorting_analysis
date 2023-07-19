@@ -13,6 +13,5 @@ using namespace std;
 int main()
 {
 	outputSort(500000, REVERSE, TIME, Q_SORT, "An_Sorting.txt");
-
 	return 0;
 }
