@@ -7,7 +7,7 @@
 using namespace std;
 
 //Selection sort
-void selectionSort_countCompare(int* a, int n, int& count_compare)
+void selectionSort_countCompare(int* a, int n, long long& count_compare)
 {
 	count_compare = 0;
 	for (int i = 0; ++count_compare && i < n - 1; i++)
@@ -42,7 +42,7 @@ void selectionSort_countTime(int* a, int n, double& time)
 }
 
 //Counting sort
-void countingSort_countCompare(int* a, int n, int k, int& count_compare)
+void countingSort_countCompare(int* a, int n, int k, long long& count_compare)
 {
 	count_compare = 0;
 	for (int i = 0; ++count_compare && i < n; i++)
@@ -118,7 +118,7 @@ void countingSort_countTime(int* a, int n, int k, double& time)
 }
 
 //Shell sort
-void shellSort_countCompare(int* a, int n, int& count_compare)
+void shellSort_countCompare(int* a, int n, long long& count_compare)
 {
 	count_compare = 0;
 	for (int gap = n / 2; ++count_compare && gap > 0; gap /= 2)

@@ -7,7 +7,7 @@
 using namespace std;
 
 //Bubble Sort
-void bubbleSort_countCompare(int* a, int n, int& count_compare)
+void bubbleSort_countCompare(int* a, int n, long long& count_compare)
 {
     count_compare = 0;
 
@@ -50,7 +50,7 @@ void bubbleSort_countTime(int* a, int n, double& time)
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
-void bubbleSort(int* a, int n, int& count_compare, double& time, int typeCount)
+void bubbleSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;
     count_compare = 0;
@@ -62,7 +62,7 @@ void bubbleSort(int* a, int n, int& count_compare, double& time, int typeCount)
 }
 
 //Heap sort
-void heapify_compare(int* a, int i, int n, int& count_compare)
+void heapify_compare(int* a, int i, int n, long long& count_compare)
 {
     int l = 2 * i + 1;
     int r = 2 * i + 2;
@@ -80,7 +80,7 @@ void heapify_compare(int* a, int i, int n, int& count_compare)
         heapify_compare(a, max, n, count_compare);
     }
 }
-void heapSort_countCompare(int* a, int n, int& count_compare)
+void heapSort_countCompare(int* a, int n, long long& count_compare)
 {
     count_compare = 0;
     for (int i = n / 2; ++count_compare && i >= 0; i--)
@@ -128,7 +128,7 @@ void heapSort_countTime(int* a, int n, double& time)
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
-void heapSort(int* a, int n, int& count_compare, double& time, int typeCount)
+void heapSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;
     count_compare = 0;
@@ -140,7 +140,7 @@ void heapSort(int* a, int n, int& count_compare, double& time, int typeCount)
 }
 
 //Quick sort
-int partition_compare(int arr[], int l, int r, int& count_compare)
+int partition_compare(int arr[], int l, int r, long long& count_compare)
 {
     // Choosing the pivot
     int pivot = arr[r];
@@ -162,7 +162,7 @@ int partition_compare(int arr[], int l, int r, int& count_compare)
     swap(arr[i + 1], arr[r]);
     return (i + 1);
 }
-void quickSort_compare(int* a, int l, int r, int& count_compare)
+void quickSort_compare(int* a, int l, int r, long long& count_compare)
 {
     // Create an auxiliary stack
     int* stack = new int[r - l + 1];
@@ -198,7 +198,7 @@ void quickSort_compare(int* a, int l, int r, int& count_compare)
     }
     delete[] stack;
 }
-void quickSort_countCompare(int* a, int n, int& count_compare)
+void quickSort_countCompare(int* a, int n, long long& count_compare)
 {
     count_compare = 0;
 
@@ -259,7 +259,7 @@ void quickSort_countTime(int* a, int n, double& time)
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
-void quickSort(int* a, int n, int& count_compare, double& time, int typeCount)
+void quickSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;
     count_compare = 0;
@@ -276,7 +276,7 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
 
     int* a = NULL;
 
-    void (*sort) (int*, int, int&, double&, int) = NULL;
+    void (*sort) (int*, int, long long&, double&, int) = NULL;
 
     if(typeSort == B_SORT)
     {

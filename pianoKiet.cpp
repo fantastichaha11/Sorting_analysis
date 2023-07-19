@@ -2,7 +2,7 @@
 using namespace std;
 
 //Bubble Sort
-void insertionSort_countCompare(int* a, int n, int& count_compare) {
+void insertionSort_countCompare(int* a, int n, long long& count_compare) {
 	count_compare = 0;
 	for (int i = 1; ++count_compare && i < n; i++) {
 		int key = a[i];
