@@ -77,7 +77,7 @@ void countingSort_countCompare(int* a, int n, int k, int& count_compare)
 	return;
 }
 
-void countingSort_countTime(int* a, int n, double& time)
+void countingSort_countTime(int* a, int n, int k, double& time)
 {
 	clock_t start, end;
 	start = clock();
