@@ -97,13 +97,13 @@ void flashSort_time(int a[], int n, double& time)
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
-void insertionSort_compare(int a[], int n, int& countCmp)
+void insertionSort_compare(int a[], int n, long long& count_compare)
 {
-	for (int i = 1; ++countCmp && i < n; i++)
+	for (int i = 1; ++count_compare && i < n; i++)
 	{
 		int key = a[i];
 		int j = i - 1;
-		while (++countCmp && j >= 0 && ++countCmp && a[j] > key)
+		while (++count_compare && j >= 0 && ++count_compare && a[j] > key)
 		{
 			a[j + 1] = a[j];
 			j--;
@@ -112,31 +112,31 @@ void insertionSort_compare(int a[], int n, int& countCmp)
 	}
 }
 
-void flashSort_compare(int a[], int n, int& countCmp)
+void flashSort_compare(int a[], int n, long long& count_compare)
 {
-	countCmp = 0;
+	count_compare = 0;
 	int minVal = a[0];
 	int max = 0;
 	int m = int(0.45 * n);
 	int* l = new int[m];
-	for (int i = 0; ++countCmp && i < m; i++)
+	for (int i = 0; ++count_compare && i < m; i++)
 		l[i] = 0;
-	for (int i = 1; ++countCmp && i < n; i++)
+	for (int i = 1; ++count_compare && i < n; i++)
 	{
-		if (++countCmp && a[i] < minVal)
+		if (++count_compare && a[i] < minVal)
 			minVal = a[i];
-		if (++countCmp && a[i] > a[max])
+		if (++count_compare && a[i] > a[max])
 			max = i;
 	}
-	if (++countCmp && a[max] == minVal)
+	if (++count_compare && a[max] == minVal)
 		return;
 	double c1 = (double)(m - 1) / (a[max] - minVal);
-	for (int i = 0; ++countCmp && i < n; i++)
+	for (int i = 0; ++count_compare && i < n; i++)
 	{
 		int k = int(c1 * (a[i] - minVal));
 		++l[k];
 	}
-	for (int i = 1; ++countCmp && i < m; i++)
+	for (int i = 1; ++count_compare && i < m; i++)
 		l[i] += l[i - 1];
 	HoanVi(a[max], a[0]);
 	int nmove = 0;
@@ -144,16 +144,16 @@ void flashSort_compare(int a[], int n, int& countCmp)
 	int k = m - 1;
 	int t = 0;
 	int flash;
-	while (++countCmp && nmove < n - 1)
+	while (++count_compare && nmove < n - 1)
 	{
-		while (++countCmp && j > l[k] - 1)
+		while (++count_compare && j > l[k] - 1)
 		{
 			j++;
 			k = int(c1 * (a[j] - minVal));
 		}
 		flash = a[j];
-		if (++countCmp && k < 0) break;
-		while (++countCmp && j != l[k])
+		if (++count_compare && k < 0) break;
+		while (++count_compare && j != l[k])
 		{
 			k = int(c1 * (flash - minVal));
 			int hold = a[t = --l[k]];
@@ -163,7 +163,7 @@ void flashSort_compare(int a[], int n, int& countCmp)
 		}
 	}
 	delete[] l;
-	insertionSort_compare(a, n, countCmp);
+	insertionSort_compare(a, n, count_compare);
 }
 
 // A utility function to get maximum
@@ -235,36 +235,36 @@ void radixSort_time(int arr[], int n, double& time)
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
-int getMax_compare(int arr[], int n, int& countCmp)
+int getMax_compare(int arr[], int n, long long& count_compare)
 {
 	int mx = arr[0];
-	for (int i = 1; ++countCmp && i < n; i++)
-		if (++countCmp && arr[i] > mx)
+	for (int i = 1; ++count_compare && i < n; i++)
+		if (++count_compare && arr[i] > mx)
 			mx = arr[i];
 	return mx;
 }
-void countSort_compare(int arr[], int n, int exp, int& countCmp)
+void countSort_compare(int arr[], int n, int exp, long long& count_compare)
 {
 	int* output = new int[n];
 	int i, count[10] = { 0 };
 
-	for (i = 0; ++countCmp && i < n; i++)
+	for (i = 0; ++count_compare && i < n; i++)
 		count[(arr[i] / exp) % 10]++;
 
-	for (i = 1; ++countCmp && i < 10; i++)
+	for (i = 1; ++count_compare && i < 10; i++)
 		count[i] += count[i - 1];
 
-	for (i = n - 1; ++countCmp && i >= 0; i--) {
+	for (i = n - 1; ++count_compare && i >= 0; i--) {
 		output[count[(arr[i] / exp) % 10] - 1] = arr[i];
 		count[(arr[i] / exp) % 10]--;
 	}
 
-	for (i = 0; ++countCmp && i < n; i++)
+	for (i = 0; ++count_compare && i < n; i++)
 		arr[i] = output[i];
 	delete[] output;
 }
 
-void radixSort_compare(int arr[], int n, int& countCmp)
+void radixSort_compare(int arr[], int n, long long& count_compare)
 {
 	count_compare = 0;
 	int m = getMax_compare(arr, n, count_compare);
