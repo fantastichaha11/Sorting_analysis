@@ -9,5 +9,5 @@ using namespace std;
 #define SHAKER_SORT 4
 //Insertion Sort
 void insertionSort_countCompare(int* a, int n, long long& count_compare);
-void insertionSort_countTime(int* a, int n, long long& count_compare);
-void shakerSort_countTime(int* a, int n, long long& count_compare);
+void insertionSort_countTime(int* a, int n, double& time);
+void shakerSort_countTime(int* a, int n, double& time);
