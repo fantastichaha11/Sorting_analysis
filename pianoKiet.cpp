@@ -81,6 +81,7 @@ void shakerSort_countTime(int* a, int n, double &time) { //Ref: geeksforgeeks
             break;
         // move the end point back by one, because item at the end is in its rightful spot
         end--;
+        swapped = false;
         // from right to left, doing the same comparison as in the previous stage
         for (int i = end - 1; i >= start; i--) {
             if (a[i] > a[i + 1]) {
