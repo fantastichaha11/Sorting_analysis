@@ -18,7 +18,7 @@ string outputPara[3] = { "-time", "-comp", "-both" };
 void main_debug()
 {
 	/*outputSort(500000, RANDOM, BOTH, H_SORT, "An_Sorting.txt");*/
-	cout << "hello";
+	cout << "hello\n";
 
 	system("pause");
 }
