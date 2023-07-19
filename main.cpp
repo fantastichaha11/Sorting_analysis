@@ -7,21 +7,12 @@
 #include <fstream>
 #include <cmath>
 #include <time.h>
+#include <string>
 using namespace std;
 
 int main()
 {
-	int* a = NULL;
-	int n = 500000;
+	outputSort(500000, REVERSE, TIME, Q_SORT, "An_Sorting.txt");
 
-	GenerateData(a, n, 1);
-
-	double time;
-	quickSort_countTime(a, n, time);
-	cout << "Sort: " << time << endl;
-	system("pause");
-
-	if(a != NULL)
-		delete[] a;
 	return 0;
 }

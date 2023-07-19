@@ -141,6 +141,9 @@
     <ClInclude Include="pianoKiet.h" />
     <ClInclude Include="sonOfABeach.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="An_Sorting.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

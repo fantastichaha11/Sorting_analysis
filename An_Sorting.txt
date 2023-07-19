@@ -1,0 +1,2 @@
+Quick Sort: 	Compare: 28773022
+Quick Sort: Quick Sort: 	Time: 640.23

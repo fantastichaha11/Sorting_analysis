@@ -1,6 +1,9 @@
 #include "anTroc.h"
+#include "DataGenerator.h"
 #include <iostream>
 #include <time.h>
+#include <fstream>
+#include <string>
 using namespace std;
 
 //Bubble Sort
@@ -139,12 +142,39 @@ int partition_compare(int arr[], int l, int r, int& count_compare)
 }
 void quickSort_compare(int* a, int l, int r, int& count_compare)
 {
-    if (++count_compare && l >= r)
-        return;
+    // Create an auxiliary stack
+    int* stack = new int[r - l + 1];
 
-    int p = partition_compare(a, l, r, count_compare);
-    quickSort_compare(a, l, p - 1, count_compare);
-    quickSort_compare(a, p + 1, r, count_compare);
+    // initialize top of stack
+    int top = -1;
+
+    // push initial values of l and h to stack
+    stack[++top] = l;
+    stack[++top] = r;
+
+    // Keep popping from stack while is not empty
+    while (++ count_compare && top >= 0) {
+        // Pop h and l
+        r = stack[top--];
+        l = stack[top--];
+
+        // Set pivot element at its correct position
+        // in sorted array
+        int p = partition_time(a, l, r);
+
+        // If there are elements on left side of pivot,
+        // then push left side to stack
+        if (++count_compare && p - 1 > l) {
+            stack[++top] = l;
+            stack[++top] = p - 1;
+        }
+
+        if (++count_compare && p + 1 < r) {
+            stack[++top] = p + 1;
+            stack[++top] = r;
+        }
+    }
+    delete[] stack;
 }
 void quickSort_countCompare(int* a, int n, int& count_compare)
 {
@@ -216,9 +246,67 @@ void quickSort_countTime(int* a, int n, double& time)
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
-void swap(int* a, int* b)
+void outputSort(int n, int typeData, int typeCount, int typeSort, string filename)
 {
-    int t = *a;
-    *a = *b;
-    *b = t;
+    ofstream fp(filename, ios::app);
+
+    int* a = NULL;
+
+    if(typeCount == TIME)
+    {
+        void (*sort) (int*, int, double&) = NULL;
+
+        if(typeSort == B_SORT)
+        {
+            sort = bubbleSort_countTime;
+            fp << "Bubble Sort: ";
+        }
+		else if(typeSort == H_SORT)
+        {
+            sort = heapSort_countTime;
+            fp << "Heap Sort: ";
+        }
+		else if(typeSort == Q_SORT)
+        {
+            sort = quickSort_countTime;
+            fp << "Quick Sort: ";
+        }
+
+        GenerateData(a, n, typeData);
+        double time = 0;
+        sort(a, n, time);
+        fp << "\tTime: ";
+        fp << time << endl;
+    }
+    else if(typeCount == COMPARE)
+    {
+        void (*sort) (int*, int, int&) = NULL;
+
+        if(typeSort == B_SORT)
+        {
+            sort = bubbleSort_countCompare;
+            fp << "Bubble Sort: ";
+        }
+        else if(typeSort == H_SORT)
+        {
+            sort = heapSort_countCompare;
+            fp << "Heap Sort: ";
+        }
+		else if(typeSort == Q_SORT)
+        {
+            sort = quickSort_countCompare;
+            fp << "Quick Sort: ";
+        }
+
+        GenerateData(a, n, typeData);
+		int count_compare = 0;
+		sort(a, n, count_compare);
+        fp << "\tCompare: ";
+		fp << count_compare << endl;
+    }
+
+    if(a != NULL)
+        delete[] a;
+
+    fp.close();
 }
