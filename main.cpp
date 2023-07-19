@@ -12,7 +12,7 @@ using namespace std;
 
 int main()
 {
-	outputSort(500000, RANDOM, BOTH, H_SORT, "An_Sorting.txt");
+	outputSort(500000, RANDOM, TIME, H_SORT, "An_Sorting.txt");
 
 	return 0;
 }

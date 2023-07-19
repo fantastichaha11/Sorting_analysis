@@ -199,7 +199,7 @@ void countSort(int arr[], int n, int exp)
 
 // The main function to that sorts arr[]
 // of size n using Radix Sort
-void radixSort_time(int arr[], int n, int& time)
+void radixSort_time(int arr[], int n, double& time)
 {
 	clock_t start, end;
 
@@ -255,4 +255,26 @@ void radixSort_compare(int arr[], int n, long long& count_compare)
 	int m = getMax_compare(arr, n, count_compare);
 	for (int exp = 1; ++count_compare && m / exp > 0; exp *= 10)
 		countSort_compare(arr, n, exp, count_compare);
+}
+
+void flashSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+	time = 0;
+	count_compare = 0;
+
+	if (typeCount == COMPARE || typeCount == BOTH)
+		flashSort_compare(a, n, count_compare);
+	if (typeCount == TIME || typeCount == BOTH)
+		flashSort_time(a, n, time);
+}
+
+void radixSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+	time = 0;
+	count_compare = 0;
+
+	if (typeCount == COMPARE || typeCount == BOTH)
+		radixSort_compare(a, n, count_compare);
+	if (typeCount == TIME || typeCount == BOTH)
+		radixSort_time(a, n, time);
 }

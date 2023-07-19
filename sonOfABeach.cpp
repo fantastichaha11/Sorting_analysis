@@ -159,4 +159,35 @@ void shellSort_countTime(int* a, int n, double& time)
 	time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
+void selectionSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+	time = 0;
+	count_compare = 0;
+
+	if (typeCount == COMPARE || typeCount == BOTH)
+		selectionSort_countCompare(a, n, count_compare);
+	if (typeCount == TIME || typeCount == BOTH)
+		selectionSort_countTime(a, n, time);
+}
+
+void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+	time = 0;
+	count_compare = 0;
+
+	if (typeCount == COMPARE || typeCount == BOTH)
+		countingSort_countCompare(a, n, count_compare);
+	if (typeCount == TIME || typeCount == BOTH)
+		countingSort_countTime(a, n, time);
+}
+
+void shellSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+	time = 0;
+	count_compare = 0;
+	if (typeCount == COMPARE || typeCount == BOTH)
+		shellSort_countCompare(a, n, count_compare);
+	if (typeCount == TIME || typeCount == BOTH)
+		shellSort_countTime(a, n, time);
+}
 //Write file
