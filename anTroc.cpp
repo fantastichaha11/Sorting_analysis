@@ -4,7 +4,6 @@
 #include <time.h>
 #include <fstream>
 #include <string>
-using namespace std;
 
 //Bubble Sort
 void bubbleSort_countCompare(int* a, int n, long long& count_compare)
@@ -114,7 +113,6 @@ void heapify_time(int* a, int i, int n)
 void heapSort_countTime(int* a, int n, double& time)
 {
     clock_t start, end;
-
     start = clock();
     for (int i = n / 2; i >= 0; i--)
         heapify_time(a, i, n);
