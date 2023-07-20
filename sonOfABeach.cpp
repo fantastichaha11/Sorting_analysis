@@ -46,6 +46,7 @@ void countingSort_countCompare(int* a, int n, long long& count_compare)
 {
 	count_compare = 0;
 	int k = 0;
+
 	for (int i = 0; ++count_compare && i < n; i++)
 	{
 		if (++count_compare && a[i] > k) k = a[i];
@@ -74,6 +75,12 @@ void countingSort_countCompare(int* a, int n, long long& count_compare)
 		S[C[a[i]] - 1] = a[i];
 		C[a[i]] = C[a[i]] - 1;
 	}
+
+	for (int i = 0; ++count_compare && i < n; i++)
+	{
+		a[i] = S[i];
+	}
+
 	delete[]C;
 	return;
 }
@@ -111,6 +118,11 @@ void countingSort_countTime(int* a, int n, double& time)
 	{
 		S[C[a[i]] - 1] = a[i];
 		C[a[i]] = C[a[i]] - 1;
+	}
+
+	for (int i = 0; i < n; i++)
+	{
+		a[i] = S[i];
 	}
 
 	end = clock();
@@ -192,4 +204,4 @@ void shellSort(int* a, int n, long long& count_compare, double& time, int typeCo
 	if (typeCount == TIME || typeCount == BOTH)
 		shellSort_countTime(a, n, time);
 }
-//Write file
+
