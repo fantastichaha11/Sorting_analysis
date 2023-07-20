@@ -257,7 +257,7 @@ void quickSort_countTime(int* a, int n, double& time)
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
 
-void quickSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+void quickSort(int* a, int n, long long& count_compare, double& time, int typeCount, int type)
 {
     time = 0;
     count_compare = 0;
