@@ -1,4 +1,17 @@
 Heap Sort: 
 	Time: 138857
 Heap Sort: 
-	Time: 0.139
+	Compare: 45970252
+	Time: 0.204
+Heap Sort: 
+	Compare: 45965811
+	Time: 0.194
+Heap Sort: 
+	Compare: 45968363
+	Time: 0.187
+Bubble Sort: 
+	Time: 8.245
+Bubble Sort: 
+	Time: 35.802
+Bubble Sort: 
+	Time: 

@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "pianoKiet.h"
 using namespace std;
 
 #define B_SORT 2
