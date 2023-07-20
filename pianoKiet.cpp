@@ -110,7 +110,7 @@ void shakerSort_countTime(int* a, int n, double &time) { //Ref: geeksforgeeks
         ++start;
     }
     finish = clock();
-    time = (double)(begin - finish) / CLOCKS_PER_SEC;
+    time = (double)(finish - begin) / CLOCKS_PER_SEC;
 }
 void mergeSort(int* a, int n, long long& count_compare, double& time, int typeCount) {
     time = 0;

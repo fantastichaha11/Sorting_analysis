@@ -19,4 +19,18 @@ Bubble Sort:
 Bubble Sort: 
 	Time: 35.802
 Bubble Sort: 
-	Time: 
+	Time: Heap Sort: 
+	Compare: 47177
+	Time: 0.001
+Insertion Sort: 
+	Compare: 497112
+	Time: 0.003
+Insertion Sort: 
+	Compare: 492707
+	Time: 0.004
+Insertion Sort: 
+	Compare: 511171
+	Time: 0.004
+Shaker Sort: 
+	Compare: 778159
+	Time: -0.014

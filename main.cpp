@@ -17,7 +17,16 @@ string outputPara[3] = { "-time", "-comp", "-both" };
 
 void main_debug()
 {
-	/*outputSort(500000, RANDOM, BOTH, H_SORT, "An_Sorting.txt");*/
+	//outputSort(1000, RANDOM, BOTH, 3, "An_Sorting.txt");
+	//outputSort(1000, RANDOM, BOTH, 4, "An_Sorting.txt");
+	int a[500000];
+	int n = 500000;
+	GenerateRandomData(a, n);
+	cout << endl;
+	double time;
+	bubbleSort_countTime(a, n, time);
+	cout << time;
+	cout << endl;
 	cout << "hello\n";
 
 	system("pause");

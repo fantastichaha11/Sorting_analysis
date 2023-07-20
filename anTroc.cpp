@@ -293,7 +293,18 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
         sort = quickSort;
         fp << "Quick Sort: " << endl;
     }
-
+    else if (typeSort == M_SORT) {
+        sort = mergeSort;
+        fp << "Merge Sort: " << endl;
+    }
+    else if (typeSort == I_SORT) {
+        sort = insertionSort;
+        fp << "Insertion Sort: " << endl;
+    }
+    else if (typeSort == SHAKER_SORT) {
+        sort = shakerSort;
+        fp << "Shaker Sort: " << endl;
+    }
     long long count_compare = 0;
     double time = 0;
     if (typeCount == COMPARE || typeCount == BOTH)
