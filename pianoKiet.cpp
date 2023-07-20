@@ -116,6 +116,7 @@ void mergeSort(int* a, int n, long long& count_compare, double& time, int typeCo
     time = 0;
     count_compare = 0;
     if (typeCount == COMPARE || typeCount == BOTH)
+        count_compare = 0;
         mergeSort_countCompare(a, 0, n - 1, count_compare);
     if (typeCount == TIME || typeCount == BOTH) {
         clock_t start, end;
@@ -130,7 +131,7 @@ void merge_countCompare(int *a, int first, int mid, int last, long long & count_
     int f1 = first, l1 = mid;
     int f2 = mid + 1, l2 = last;
     int i = first;
-    while (count_compare+=2 && (f1 <= l1) && (f2 <= l2)) {
+    while (count_compare++ && (f1 <= l1) && count_compare++ && (f2 <= l2)) {
         if (count_compare += 2 && a[f1] <= a[f2]) {
             temp[i] = a[f1];
             f1++;
@@ -141,17 +142,17 @@ void merge_countCompare(int *a, int first, int mid, int last, long long & count_
         }
         i++;
     }
-    while (count_compare += 2 && f1 <= l1) {
+    while (count_compare ++ && f1 <= l1) {
         temp[i] = a[f1];
         i++;
         f1++;
     }
-    while (count_compare += 2 && f2 <= l2) {
+    while (count_compare ++ && f2 <= l2) {
         temp[i] = a[f2];
         f2++;
         i++;
     }
-    for (i = first; count_compare += 2 && i <= last; i++) {
+    for (i = first; count_compare ++ && i <= last; i++) {
         a[i] = temp[i];
     }
     delete[] temp;
