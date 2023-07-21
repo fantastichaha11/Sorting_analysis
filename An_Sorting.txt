@@ -16,3 +16,13 @@ Bubble Sort:
 Bubble Sort: 
 	Time: Heap Sort: 
 	Time: 0.476
+Heap Sort: 
+	Time: 0.137
+Heap Sort: 
+	Time: 0.137
+Heap Sort: 
+	Compare: 44483352
+	Time: 0.135
+Heap Sort: 
+	Compare: 44483352
+	Time: 0.133

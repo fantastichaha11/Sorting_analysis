@@ -31,5 +31,3 @@ void quickSort_time(int* a, int l, int r);
 void quickSort_countTime(int* a, int n, double& time);
 
 void quickSort(int* a, int n, long long& count_compare, double& time, int typeCount);
-
-void outputSort(int n, int typeData, int typeCount, int typeSort, string filename);
