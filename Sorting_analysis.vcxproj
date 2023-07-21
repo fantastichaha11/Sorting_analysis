@@ -108,6 +108,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ForceFileOutput>MultiplyDefinedSymbolOnly</ForceFileOutput>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,24 +128,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="anTroc.cpp" />
     <ClCompile Include="DataGenerator.cpp" />
     <ClCompile Include="Function.cpp" />
-    <ClCompile Include="hieuHo.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="pianoKiet.cpp" />
-    <ClCompile Include="sonOfABeach.cpp" />
+    <ClCompile Include="sorting_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="anTroc.h" />
     <ClInclude Include="DataGenerator.h" />
     <ClInclude Include="Function.h" />
-    <ClInclude Include="hieuHo.h" />
-    <ClInclude Include="pianoKiet.h" />
-    <ClInclude Include="sonOfABeach.h" />
+    <ClInclude Include="sorting_functions.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="An_Sorting.txt" />
+    <Text Include="Kiet_Ascending.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

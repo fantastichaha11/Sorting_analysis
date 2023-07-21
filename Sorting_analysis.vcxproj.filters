@@ -18,47 +18,32 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sonOfABeach.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="pianoKiet.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="hieuHo.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="anTroc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DataGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sorting_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="sonOfABeach.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="pianoKiet.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="hieuHo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="anTroc.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DataGenerator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sorting_functions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="An_Sorting.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="Kiet_Ascending.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
