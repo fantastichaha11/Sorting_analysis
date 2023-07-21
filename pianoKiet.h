@@ -5,9 +5,9 @@
 #include <string>
 using namespace std;
 
-#define I_SORT 3
-#define SHAKER_SORT 4
-#define M_SORT 7
+#define I_SORT 1
+#define SHAKER_SORT 3
+#define M_SORT 6
 //Insertion Sort
 void insertionSort(int* a, int n, long long& count_compare, double& time, int typeCount);
 void insertionSort_countCompare(int* a, int n, long long& count_compare);

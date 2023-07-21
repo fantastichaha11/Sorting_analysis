@@ -305,21 +305,28 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
     }
     long long count_compare = 0;
     double time = 0;
-    if (typeCount == COMPARE || typeCount == BOTH)
+    if (typeCount == COMPARE)
     {
         fp << "\tCompare: ";
         GenerateData(a, n, typeData);
         sort(a, n, count_compare, time, COMPARE);
         fp << count_compare << endl;
     }
-    if (typeCount == TIME || typeCount == BOTH)
+    if (typeCount == TIME)
     {
         fp << "\tTime: ";
         GenerateData(a, n, typeData);
         sort(a, n, count_compare, time, TIME);
         fp << time << endl;
     }
-
+    else {
+        fp << "\tTime: ";
+        GenerateData(a, n, typeData);
+        sort(a, n, count_compare, time, BOTH);
+        fp << count_compare << endl;
+        fp << time << endl;
+    }
+    
     if(a != NULL)
         delete[] a;
 

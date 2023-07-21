@@ -1,7 +1,19 @@
 #include "pianoKiet.h"
 using namespace std;
 
-//Bubble Sort
+//Bubble Sort 
+int* duplicateArr(int* a, int n) {
+    int* b = new int[n];
+    for (int i = 0; i < n; i++) {
+        b[i] = a[i];
+    }
+    return b;
+}
+void countCompare(int* a, int n, int dataType, string filename) {
+
+}
+
+
 void insertionSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;
