@@ -1,5 +1,12 @@
 #include "Function.h"
 
+typedef void(*pSort)(int*, int, long long&, double&, int);
+
+pSort listSort[11] = { selectionSort, insertionSort, bubbleSort, shakerSort, shellSort, heapSort,
+                        mergeSort, quickSort, countingSort, radixSort, flashSort };
+string listNameSort[11] = { "Selection Sort", "Insertion Sort", "Bubble Sort", "Shaker Sort", "Shell Sort", "Heap Sort",
+                            "Merge Sort", "Quick Sort", "Counting Sort", "Radix Sort", "Flash Sort" };
+
 void outputSort(int n, int typeData, int typeCount, int typeSort, string filename)
 {
     ofstream fp(filename, ios::app);
@@ -7,6 +14,7 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
     int* a = NULL;
 
     pSort sort = listSort[typeSort];
+    fp << listNameSort[typeSort] << endl;
 
     long long count_compare = 0;
     double time = 0;

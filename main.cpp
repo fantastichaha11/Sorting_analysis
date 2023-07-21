@@ -9,6 +9,7 @@
 #include <cmath>
 #include <time.h>
 #include <string>
+#include <string.h>
 
 string mode[2] = { "-a", "-c" };
 string algoName[11] = { "selection-sort", "insertion-sort", "bubble-sort", "shaker-sort", "shell-sort", "heap-sort",
