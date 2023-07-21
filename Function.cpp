@@ -2,10 +2,6 @@
 
 #include <chrono>
 using namespace std::chrono;
-typedef void(*pSort)(int*, int, long long&, double&, int);
-
-pSort listSort[11] = { selectionSort, insertionSort, bubbleSort, shakerSort, shellSort, heapSort,
-                        mergeSort, quickSort, countingSort, radixSort, flashSort };
 string listNameSort[11] = { "Selection Sort", "Insertion Sort", "Bubble Sort", "Shaker Sort", "Shell Sort", "Heap Sort",
                             "Merge Sort", "Quick Sort", "Counting Sort", "Radix Sort", "Flash Sort" };
 int listSize[6] = { 10000, 30000, 50000, 100000, 300000, 500000 };
