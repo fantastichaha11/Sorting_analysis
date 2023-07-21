@@ -79,6 +79,58 @@ void insertionSort_countTime(int* a, int n, double& time) {
     end = clock();
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
+//Bubble Sort
+void bubbleSort_countCompare(int* a, int n, long long& count_compare)
+{
+    count_compare = 0;
+
+    int i, j;
+    bool swapped;
+    for (i = 0; ++count_compare && i < n - 1; i++) {
+        swapped = false;
+        for (j = 0; ++count_compare && j < n - i - 1; j++) {
+            if (++count_compare && a[j] > a[j + 1]) {
+                swap(a[j], a[j + 1]);
+                swapped = true;
+            }
+        }
+
+        if (++count_compare && swapped == false)
+            break;
+    }
+}
+void bubbleSort_countTime(int* a, int n, double& time)
+{
+    clock_t start, end;
+
+    start = clock();
+    int i, j;
+    bool swapped;
+    for (i = 0; i < n - 1; i++) {
+        swapped = false;
+        for (j = 0; j < n - i - 1; j++) {
+            if (a[j] > a[j + 1]) {
+                swap(a[j], a[j + 1]);
+                swapped = true;
+            }
+        }
+
+        if (swapped == false)
+            break;
+    }
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+void bubbleSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        bubbleSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        bubbleSort_countTime(a, n, time);
+}
 //Shaker Sort
 void shakerSort(int* a, int n, long long& count_compare, double& time, int typeCount) {
     time = 0;
@@ -153,6 +205,129 @@ void shakerSort_countTime(int* a, int n, double& time) { //Ref: geeksforgeeks
     }
     finish = clock();
     time = (double)(finish - begin) / CLOCKS_PER_SEC;
+}
+//Shell Sort
+void shellSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+    if (typeCount == COMPARE || typeCount == BOTH)
+        shellSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        shellSort_countTime(a, n, time);
+}
+void shellSort_countCompare(int* a, int n, long long& count_compare)
+{
+    count_compare = 0;
+    for (int gap = n / 2; ++count_compare && gap > 0; gap /= 2)
+    {
+        for (int i = gap; ++count_compare && i < n; i++)
+        {
+            int temp = a[i];
+            int j;
+            for (j = i; (++count_compare && j >= gap) && (++count_compare && a[j - gap] > temp); j -= gap)
+            {
+                a[j] = a[j - gap];
+            }
+            a[j] = temp;
+        }
+    }
+}
+void shellSort_countTime(int* a, int n, double& time)
+{
+    clock_t start, end;
+    start = clock();
+
+    for (int gap = n / 2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < n; i++)
+        {
+            int temp = a[i];
+            int j;
+            for (j = i; j >= gap && a[j - gap] > temp; j -= gap)
+            {
+                a[j] = a[j - gap];
+            }
+            a[j] = temp;
+        }
+    }
+
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+//Heap sort
+void heapify_compare(int* a, int i, int n, long long& count_compare)
+{
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+    int max = i;
+
+    if ((++count_compare && l < n) && (++count_compare && a[l] > a[max]))
+        max = l;
+
+    if ((++count_compare && r < n) && (++count_compare && a[r] > a[max]))
+        max = r;
+
+    if (++count_compare && max != i)
+    {
+        swap(a[i], a[max]);
+        heapify_compare(a, max, n, count_compare);
+    }
+}
+void heapSort_countCompare(int* a, int n, long long& count_compare)
+{
+    count_compare = 0;
+    for (int i = n / 2; ++count_compare && i >= 0; i--)
+        heapify_compare(a, i, n, count_compare);
+
+    for (int i = n - 1; ++count_compare && i > 0; i--)
+    {
+        swap(a[i], a[0]);
+        heapify_compare(a, 0, i, count_compare);
+    }
+}
+void heapify_time(int* a, int i, int n)
+{
+    int l = 2 * i + 1;
+    int r = 2 * i + 2;
+    int max = i;
+
+    if (l < n && a[l] > a[max])
+        max = l;
+
+    if (r < n && a[r] > a[max])
+        max = r;
+
+    if (max != i)
+    {
+        swap(a[i], a[max]);
+        heapify_time(a, max, n);
+    }
+}
+void heapSort_countTime(int* a, int n, double& time)
+{
+    clock_t start, end;
+    start = clock();
+    for (int i = n / 2; i >= 0; i--)
+        heapify_time(a, i, n);
+
+    for (int i = n - 1; i > 0; i--)
+    {
+        swap(a[i], a[0]);
+        heapify_time(a, 0, i);
+    }
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+void heapSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        heapSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        heapSort_countTime(a, n, time);
 }
 //Merge Sort
 void mergeSort(int* a, int n, long long& count_compare, double& time, int typeCount) {
@@ -248,279 +423,6 @@ void mergeSort_countTime(int* a, int first, int last) {
     mergeSort_countTime(a, first, mid);
     mergeSort_countTime(a, mid + 1, last);
     merge_countTime(a, first, mid, last);
-}
-//Counting Sort
-void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount)
-{
-    time = 0;
-    count_compare = 0;
-
-    if (typeCount == COMPARE || typeCount == BOTH)
-        countingSort_countCompare(a, n, count_compare);
-    if (typeCount == TIME || typeCount == BOTH)
-        countingSort_countTime(a, n, time);
-}
-void countingSort_countCompare(int* a, int n, long long& count_compare)
-{
-    count_compare = 0;
-    int k = 0;
-
-    for (int i = 0; ++count_compare && i < n; i++)
-    {
-        if (++count_compare && a[i] > k) k = a[i];
-    }
-
-    int* S = new int[n];
-    int* C = new int[k + 1];
-
-    for (int j = 0; ++count_compare && j <= k; j++)
-    {
-        C[j] = 0;
-    }
-
-    for (int i = 0; ++count_compare && i < n; i++)
-    {
-        C[a[i]] = C[a[i]] + 1;
-    }
-
-    for (int i = 1; ++count_compare && i <= k; i++)
-    {
-        C[i] = C[i - 1] + C[i];
-    }
-
-    for (int i = n - 1; ++count_compare && i >= 0; i--)
-    {
-        S[C[a[i]] - 1] = a[i];
-        C[a[i]] = C[a[i]] - 1;
-    }
-
-    for (int i = 0; ++count_compare && i < n; i++)
-    {
-        a[i] = S[i];
-    }
-
-    delete[]C;
-    return;
-}
-void countingSort_countTime(int* a, int n, double& time)
-{
-    int k = 0;
-    clock_t start, end;
-    start = clock();
-
-    for (int i = 0; i < n; i++)
-    {
-        if (a[i] > k) k = a[i];
-    }
-
-    int* S = new int[n];
-    int* C = new int[k + 1];
-
-    for (int j = 0; j <= k; j++)
-    {
-        C[j] = 0;
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        C[a[i]] = C[a[i]] + 1;
-    }
-
-    for (int i = 1; i <= k; i++)
-    {
-        C[i] = C[i - 1] + C[i];
-    }
-
-    for (int i = n - 1; i >= 0; i--)
-    {
-        S[C[a[i]] - 1] = a[i];
-        C[a[i]] = C[a[i]] - 1;
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        a[i] = S[i];
-    }
-
-    end = clock();
-    time = (double)(end - start) / CLOCKS_PER_SEC;
-    delete[]C;
-    return;
-}
-//Shell Sort
-void shellSort(int* a, int n, long long& count_compare, double& time, int typeCount)
-{
-    time = 0;
-    count_compare = 0;
-    if (typeCount == COMPARE || typeCount == BOTH)
-        shellSort_countCompare(a, n, count_compare);
-    if (typeCount == TIME || typeCount == BOTH)
-        shellSort_countTime(a, n, time);
-}
-void shellSort_countCompare(int* a, int n, long long& count_compare)
-{
-    count_compare = 0;
-    for (int gap = n / 2; ++count_compare && gap > 0; gap /= 2)
-    {
-        for (int i = gap; ++count_compare && i < n; i++)
-        {
-            int temp = a[i];
-            int j;
-            for (j = i; (++count_compare && j >= gap) && (++count_compare && a[j - gap] > temp); j -= gap)
-            {
-                a[j] = a[j - gap];
-            }
-            a[j] = temp;
-        }
-    }
-}
-void shellSort_countTime(int* a, int n, double& time)
-{
-    clock_t start, end;
-    start = clock();
-
-    for (int gap = n / 2; gap > 0; gap /= 2)
-    {
-        for (int i = gap; i < n; i++)
-        {
-            int temp = a[i];
-            int j;
-            for (j = i; j >= gap && a[j - gap] > temp; j -= gap)
-            {
-                a[j] = a[j - gap];
-            }
-            a[j] = temp;
-        }
-    }
-
-    end = clock();
-    time = (double)(end - start) / CLOCKS_PER_SEC;
-}
-//Bubble Sort
-void bubbleSort_countCompare(int* a, int n, long long& count_compare)
-{
-    count_compare = 0;
-
-    int i, j;
-    bool swapped;
-    for (i = 0; ++count_compare && i < n - 1; i++) {
-        swapped = false;
-        for (j = 0; ++count_compare && j < n - i - 1; j++) {
-            if (++count_compare && a[j] > a[j + 1]) {
-                swap(a[j], a[j + 1]);
-                swapped = true;
-            }
-        }
-
-        if (++count_compare && swapped == false)
-            break;
-    }
-}
-void bubbleSort_countTime(int* a, int n, double& time)
-{
-    clock_t start, end;
-
-    start = clock();
-    int i, j;
-    bool swapped;
-    for (i = 0; i < n - 1; i++) {
-        swapped = false;
-        for (j = 0; j < n - i - 1; j++) {
-            if (a[j] > a[j + 1]) {
-                swap(a[j], a[j + 1]);
-                swapped = true;
-            }
-        }
-
-        if (swapped == false)
-            break;
-    }
-    end = clock();
-    time = (double)(end - start) / CLOCKS_PER_SEC;
-}
-void bubbleSort(int* a, int n, long long& count_compare, double& time, int typeCount)
-{
-    time = 0;
-    count_compare = 0;
-
-    if (typeCount == COMPARE || typeCount == BOTH)
-        bubbleSort_countCompare(a, n, count_compare);
-    if (typeCount == TIME || typeCount == BOTH)
-        bubbleSort_countTime(a, n, time);
-}
-//Heap sort
-void heapify_compare(int* a, int i, int n, long long& count_compare)
-{
-    int l = 2 * i + 1;
-    int r = 2 * i + 2;
-    int max = i;
-
-    if ((++count_compare && l < n) && (++count_compare && a[l] > a[max]))
-        max = l;
-
-    if ((++count_compare && r < n) && (++count_compare && a[r] > a[max]))
-        max = r;
-
-    if (++count_compare && max != i)
-    {
-        swap(a[i], a[max]);
-        heapify_compare(a, max, n, count_compare);
-    }
-}
-void heapSort_countCompare(int* a, int n, long long& count_compare)
-{
-    count_compare = 0;
-    for (int i = n / 2; ++count_compare && i >= 0; i--)
-        heapify_compare(a, i, n, count_compare);
-
-    for (int i = n - 1; ++count_compare && i > 0; i--)
-    {
-        swap(a[i], a[0]);
-        heapify_compare(a, 0, i, count_compare);
-    }
-}
-void heapify_time(int* a, int i, int n)
-{
-    int l = 2 * i + 1;
-    int r = 2 * i + 2;
-    int max = i;
-
-    if (l < n && a[l] > a[max])
-        max = l;
-
-    if (r < n && a[r] > a[max])
-        max = r;
-
-    if (max != i)
-    {
-        swap(a[i], a[max]);
-        heapify_time(a, max, n);
-    }
-}
-void heapSort_countTime(int* a, int n, double& time)
-{
-    clock_t start, end;
-    start = clock();
-    for (int i = n / 2; i >= 0; i--)
-        heapify_time(a, i, n);
-
-    for (int i = n - 1; i > 0; i--)
-    {
-        swap(a[i], a[0]);
-        heapify_time(a, 0, i);
-    }
-    end = clock();
-    time = (double)(end - start) / CLOCKS_PER_SEC;
-}
-void heapSort(int* a, int n, long long& count_compare, double& time, int typeCount)
-{
-    time = 0;
-    count_compare = 0;
-
-    if (typeCount == COMPARE || typeCount == BOTH)
-        heapSort_countCompare(a, n, count_compare);
-    if (typeCount == TIME || typeCount == BOTH)
-        heapSort_countTime(a, n, time);
 }
 //Quick sort
 int partition_compare(int arr[], int l, int r, long long& count_compare)
@@ -649,6 +551,105 @@ void quickSort(int* a, int n, long long& count_compare, double& time, int typeCo
     if (typeCount == TIME || typeCount == BOTH)
         quickSort_countTime(a, n, time);
 }
+//Counting Sort
+void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        countingSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        countingSort_countTime(a, n, time);
+}
+void countingSort_countCompare(int* a, int n, long long& count_compare)
+{
+    count_compare = 0;
+    int k = 0;
+
+    for (int i = 0; ++count_compare && i < n; i++)
+    {
+        if (++count_compare && a[i] > k) k = a[i];
+    }
+
+    int* S = new int[n];
+    int* C = new int[k + 1];
+
+    for (int j = 0; ++count_compare && j <= k; j++)
+    {
+        C[j] = 0;
+    }
+
+    for (int i = 0; ++count_compare && i < n; i++)
+    {
+        C[a[i]] = C[a[i]] + 1;
+    }
+
+    for (int i = 1; ++count_compare && i <= k; i++)
+    {
+        C[i] = C[i - 1] + C[i];
+    }
+
+    for (int i = n - 1; ++count_compare && i >= 0; i--)
+    {
+        S[C[a[i]] - 1] = a[i];
+        C[a[i]] = C[a[i]] - 1;
+    }
+
+    for (int i = 0; ++count_compare && i < n; i++)
+    {
+        a[i] = S[i];
+    }
+
+    delete[]C;
+    return;
+}
+void countingSort_countTime(int* a, int n, double& time)
+{
+    int k = 0;
+    clock_t start, end;
+    start = clock();
+
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] > k) k = a[i];
+    }
+
+    int* S = new int[n];
+    int* C = new int[k + 1];
+
+    for (int j = 0; j <= k; j++)
+    {
+        C[j] = 0;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        C[a[i]] = C[a[i]] + 1;
+    }
+
+    for (int i = 1; i <= k; i++)
+    {
+        C[i] = C[i - 1] + C[i];
+    }
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        S[C[a[i]] - 1] = a[i];
+        C[a[i]] = C[a[i]] - 1;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        a[i] = S[i];
+    }
+
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+    delete[]C;
+    return;
+}
+
 //Hieu
 bool KeySearch(string key, string arr[], int n, short& code)
 {

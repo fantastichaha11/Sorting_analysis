@@ -5,7 +5,6 @@
 #include <time.h>
 #include <string>
 using namespace std;
-
 #define S_SORT 0
 #define I_SORT 1
 #define B_SORT 2

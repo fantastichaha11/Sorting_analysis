@@ -1,9 +1,4 @@
 #include "Function.h"
-#include "anTroc.h"
-#include "hieuHo.h"
-#include "pianoKiet.h"
-#include "sonOfABeach.h"
-#include "DataGenerator.h"
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -18,6 +13,7 @@ string outputPara[3] = { "-time", "-comp", "-both" };
 
 void main_debug()
 {
+	cout << "HI";
 }
 
 int main(int argc, char** argv)
