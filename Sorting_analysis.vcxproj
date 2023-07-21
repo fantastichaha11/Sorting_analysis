@@ -134,6 +134,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pianoKiet.cpp" />
     <ClCompile Include="sonOfABeach.cpp" />
+    <ClCompile Include="sorting_functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="anTroc.h" />
@@ -142,6 +143,7 @@
     <ClInclude Include="hieuHo.h" />
     <ClInclude Include="pianoKiet.h" />
     <ClInclude Include="sonOfABeach.h" />
+    <ClInclude Include="sorting_functions.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="An_Sorting.txt" />

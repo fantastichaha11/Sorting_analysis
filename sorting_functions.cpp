@@ -1,0 +1,675 @@
+#include "sorting_function.h"
+
+//Selection Sort
+void selectionSort_countCompare(int* a, int n, long long& count_compare)
+{
+    count_compare = 0;
+    for (int i = 0; ++count_compare && i < n - 1; i++)
+    {
+        int minID = i;
+        for (int j = i + 1; ++count_compare && j < n; j++)
+        {
+            if (++count_compare && a[minID] > a[j]) minID = j;
+        }
+        swap(a[i], a[minID]);
+    }
+}
+void selectionSort_countTime(int* a, int n, double& time)
+{
+    clock_t start, end;
+    start = clock();
+
+    for (int i = 0; i < n - 1; i++)
+    {
+        int minID = i;
+        for (int j = i + 1; j < n; j++)
+        {
+            if (a[minID] > a[j]) minID = j;
+        }
+        swap(a[i], a[minID]);
+    }
+
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+void selectionSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        selectionSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        selectionSort_countTime(a, n, time);
+}
+//Insertion Sort
+void insertionSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+    if (typeCount == COMPARE || typeCount == BOTH)
+        insertionSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        insertionSort_countTime(a, n, time);
+}
+void insertionSort_countCompare(int* a, int n, long long& count_compare) {
+    count_compare = 0;
+    for (int i = 1; ++count_compare && i < n; i++) {
+        int key = a[i];
+        int j = i - 1;
+        while (++count_compare && j >= 0 && ++count_compare && a[j] > key) {
+            a[j + 1] = a[j];
+            j = j - 1;
+        }
+        a[j + 1] = key;
+    }
+}
+void insertionSort_countTime(int* a, int n, double& time) {
+    clock_t start, end;
+    start = clock();
+    for (int i = 1; i < n; i++) {
+        int key = a[i];
+        int j = i - 1;
+        while (j >= 0 && a[j] > key) {
+            a[j + 1] = a[j];
+            j = j - 1;
+        }
+        a[j + 1] = key;
+    }
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+//Shaker Sort
+void shakerSort(int* a, int n, long long& count_compare, double& time, int typeCount) {
+    time = 0;
+    count_compare = 0;
+    if (typeCount == COMPARE || typeCount == BOTH)
+        shakerSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        shakerSort_countTime(a, n, time);
+}
+void shakerSort_countCompare(int* a, int n, long long& count_compare) { //Ref: geeksforgeeks
+    count_compare = 0;
+    bool swapped = true;
+    int start = 0;
+    int end = n - 1;
+    while (swapped) {
+        // reset the swapped flag on entering the loop, because it might be true from a previous iteration.
+        swapped = false;
+        // loop from left to right same as the bubble sort
+        for (int i = start; ++count_compare && i < end; i++) {
+            if (++count_compare && a[i] > a[i + 1]) {
+                swap(a[i], a[i + 1]);
+                swapped = true;
+            }
+        }
+        // if nothing moved, then array is sorted. otherwise, reset the swapped flag so that it can be used in the next stage
+        if (!swapped)
+            break;
+        // move the end point back by one, because item at the end is in its rightful spot
+        end--;
+        // from right to left, doing the same comparison as in the previous stage
+        for (int i = end - 1; ++count_compare && i >= start; i--) {
+            if (++count_compare && a[i] > a[i + 1]) {
+                swap(a[i], a[i + 1]);
+                swapped = true;
+            }
+        }
+        // increase the starting point, because the last stage would have moved the next smallest number to its rightful spot.
+        ++start;
+    }
+}
+void shakerSort_countTime(int* a, int n, double& time) { //Ref: geeksforgeeks
+    clock_t begin, finish;
+    begin = clock();
+    bool swapped = true;
+    int start = 0;
+    int end = n - 1;
+    while (swapped) {
+        // reset the swapped flag on entering the loop, because it might be true from a previous iteration.
+        swapped = false;
+        // loop from left to right same as the bubble sort
+        for (int i = start; i < end; i++) {
+            if (a[i] > a[i + 1]) {
+                swap(a[i], a[i + 1]);
+                swapped = true;
+            }
+        }
+        // if nothing moved, then array is sorted. otherwise, reset the swapped flag so that it can be used in the next stage
+        if (!swapped)
+            break;
+        // move the end point back by one, because item at the end is in its rightful spot
+        end--;
+        swapped = false;
+        // from right to left, doing the same comparison as in the previous stage
+        for (int i = end - 1; i >= start; i--) {
+            if (a[i] > a[i + 1]) {
+                swap(a[i], a[i + 1]);
+                swapped = true;
+            }
+        }
+        // increase the starting point, because the last stage would have moved the next smallest number to its rightful spot.
+        ++start;
+    }
+    finish = clock();
+    time = (double)(finish - begin) / CLOCKS_PER_SEC;
+}
+//Merge Sort
+void mergeSort(int* a, int n, long long& count_compare, double& time, int typeCount) {
+    time = 0;
+    count_compare = 0;
+    if (typeCount == COMPARE || typeCount == BOTH)
+        count_compare = 0;
+    mergeSort_countCompare(a, 0, n - 1, count_compare);
+    if (typeCount == TIME || typeCount == BOTH) {
+        clock_t start, end;
+        start = clock();
+        mergeSort_countTime(a, 0, n - 1);
+        end = clock();
+        time = (double)(end - start) / CLOCKS_PER_SEC;
+    }
+}
+void merge_countCompare(int* a, int first, int mid, int last, long long& count_compare) {
+    int* temp = new int[last + 1];
+    int f1 = first, l1 = mid;
+    int f2 = mid + 1, l2 = last;
+    int i = first;
+    while (count_compare++ && (f1 <= l1) && count_compare++ && (f2 <= l2)) {
+        if (count_compare += 2 && a[f1] <= a[f2]) {
+            temp[i] = a[f1];
+            f1++;
+        }
+        else {
+            temp[i] = a[f2];
+            f2++;
+        }
+        i++;
+    }
+    while (count_compare++ && f1 <= l1) {
+        temp[i] = a[f1];
+        i++;
+        f1++;
+    }
+    while (count_compare++ && f2 <= l2) {
+        temp[i] = a[f2];
+        f2++;
+        i++;
+    }
+    for (i = first; count_compare++ && i <= last; i++) {
+        a[i] = temp[i];
+    }
+    delete[] temp;
+}
+void mergeSort_countCompare(int* a, int first, int last, long long& count_compare) {
+    if (count_compare += 2 && first >= last) {
+        return;
+    }
+    int mid = (first + last) / 2;
+    mergeSort_countCompare(a, first, mid, count_compare);
+    mergeSort_countCompare(a, mid + 1, last, count_compare);
+    merge_countCompare(a, first, mid, last, count_compare);
+}
+void merge_countTime(int* a, int first, int mid, int last) {
+    int* temp = new int[last + 1];
+    int f1 = first, l1 = mid;
+    int f2 = mid + 1, l2 = last;
+    int i = first;
+    while ((f1 <= l1) && (f2 <= l2)) {
+        if (a[f1] <= a[f2]) {
+            temp[i] = a[f1];
+            f1++;
+        }
+        else {
+            temp[i] = a[f2];
+            f2++;
+        }
+        i++;
+    }
+    while (f1 <= l1) {
+        temp[i] = a[f1];
+        i++;
+        f1++;
+    }
+    while (f2 <= l2) {
+        temp[i] = a[f2];
+        f2++;
+        i++;
+    }
+    for (i = first; i <= last; i++) {
+        a[i] = temp[i];
+    }
+    delete[] temp;
+}
+void mergeSort_countTime(int* a, int first, int last) {
+    if (first >= last) {
+        return;
+    }
+    int mid = (first + last) / 2;
+    mergeSort_countTime(a, first, mid);
+    mergeSort_countTime(a, mid + 1, last);
+    merge_countTime(a, first, mid, last);
+}
+//Counting sort
+void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        countingSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        countingSort_countTime(a, n, time);
+}
+void countingSort_countCompare(int* a, int n, long long& count_compare)
+{
+    count_compare = 0;
+    int k = 0;
+
+    for (int i = 0; ++count_compare && i < n; i++)
+    {
+        if (++count_compare && a[i] > k) k = a[i];
+    }
+
+    int* S = new int[n];
+    int* C = new int[k + 1];
+
+    for (int j = 0; ++count_compare && j <= k; j++)
+    {
+        C[j] = 0;
+    }
+
+    for (int i = 0; ++count_compare && i < n; i++)
+    {
+        C[a[i]] = C[a[i]] + 1;
+    }
+
+    for (int i = 1; ++count_compare && i <= k; i++)
+    {
+        C[i] = C[i - 1] + C[i];
+    }
+
+    for (int i = n - 1; ++count_compare && i >= 0; i--)
+    {
+        S[C[a[i]] - 1] = a[i];
+        C[a[i]] = C[a[i]] - 1;
+    }
+
+    for (int i = 0; ++count_compare && i < n; i++)
+    {
+        a[i] = S[i];
+    }
+
+    delete[]C;
+    return;
+}
+void countingSort_countTime(int* a, int n, double& time)
+{
+    int k = 0;
+    clock_t start, end;
+    start = clock();
+
+    for (int i = 0; i < n; i++)
+    {
+        if (a[i] > k) k = a[i];
+    }
+
+    int* S = new int[n];
+    int* C = new int[k + 1];
+
+    for (int j = 0; j <= k; j++)
+    {
+        C[j] = 0;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        C[a[i]] = C[a[i]] + 1;
+    }
+
+    for (int i = 1; i <= k; i++)
+    {
+        C[i] = C[i - 1] + C[i];
+    }
+
+    for (int i = n - 1; i >= 0; i--)
+    {
+        S[C[a[i]] - 1] = a[i];
+        C[a[i]] = C[a[i]] - 1;
+    }
+
+    for (int i = 0; i < n; i++)
+    {
+        a[i] = S[i];
+    }
+
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+    delete[]C;
+    return;
+}
+//Shell sort
+void shellSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+    if (typeCount == COMPARE || typeCount == BOTH)
+        shellSort_countCompare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        shellSort_countTime(a, n, time);
+}
+void shellSort_countCompare(int* a, int n, long long& count_compare)
+{
+    count_compare = 0;
+    for (int gap = n / 2; ++count_compare && gap > 0; gap /= 2)
+    {
+        for (int i = gap; ++count_compare && i < n; i++)
+        {
+            int temp = a[i];
+            int j;
+            for (j = i; (++count_compare && j >= gap) && (++count_compare && a[j - gap] > temp); j -= gap)
+            {
+                a[j] = a[j - gap];
+            }
+            a[j] = temp;
+        }
+    }
+}
+void shellSort_countTime(int* a, int n, double& time)
+{
+    clock_t start, end;
+    start = clock();
+
+    for (int gap = n / 2; gap > 0; gap /= 2)
+    {
+        for (int i = gap; i < n; i++)
+        {
+            int temp = a[i];
+            int j;
+            for (j = i; j >= gap && a[j - gap] > temp; j -= gap)
+            {
+                a[j] = a[j - gap];
+            }
+            a[j] = temp;
+        }
+    }
+
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+//Hieu
+bool KeySearch(string key, string arr[], int n, short& code)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == key)
+        {
+            code = i;
+            return true;
+        }
+    }
+    return false;
+}
+void insertionSort(int a[], int n)
+{
+    for (int i = 1; i < n; i++)
+    {
+        int key = a[i];
+        int j = i - 1;
+        while (j >= 0 && a[j] > key)
+        {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = key;
+    }
+}
+void flashSort_time(int a[], int n, double& time)
+{
+    clock_t start, end;
+
+    start = clock();
+
+    int minVal = a[0];
+    int max = 0;
+    int m = int(0.45 * n);
+    int* l = new int[m];
+    for (int i = 0; i < m; i++)
+        l[i] = 0;
+    for (int i = 1; i < n; i++)
+    {
+        if (a[i] < minVal)
+            minVal = a[i];
+        if (a[i] > a[max])
+            max = i;
+    }
+    if (a[max] == minVal)
+        return;
+    double c1 = (double)(m - 1) / (a[max] - minVal);
+    for (int i = 0; i < n; i++)
+    {
+        int k = int(c1 * (a[i] - minVal));
+        ++l[k];
+    }
+    for (int i = 1; i < m; i++)
+        l[i] += l[i - 1];
+    HoanVi(a[max], a[0]);
+    int nmove = 0;
+    int j = 0;
+    int k = m - 1;
+    int t = 0;
+    int flash;
+    while (nmove < n - 1)
+    {
+        while (j > l[k] - 1)
+        {
+            j++;
+            k = int(c1 * (a[j] - minVal));
+        }
+        flash = a[j];
+        if (k < 0) break;
+        while (j != l[k])
+        {
+            k = int(c1 * (flash - minVal));
+            int hold = a[t = --l[k]];
+            a[t] = flash;
+            flash = hold;
+            ++nmove;
+        }
+    }
+    delete[] l;
+    insertionSort(a, n);
+
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+void insertionSort_compare(int a[], int n, long long& count_compare)
+{
+    for (int i = 1; ++count_compare && i < n; i++)
+    {
+        int key = a[i];
+        int j = i - 1;
+        while (++count_compare && j >= 0 && ++count_compare && a[j] > key)
+        {
+            a[j + 1] = a[j];
+            j--;
+        }
+        a[j + 1] = key;
+    }
+}
+void flashSort_compare(int a[], int n, long long& count_compare)
+{
+    count_compare = 0;
+    int minVal = a[0];
+    int max = 0;
+    int m = int(0.45 * n);
+    int* l = new int[m];
+    for (int i = 0; ++count_compare && i < m; i++)
+        l[i] = 0;
+    for (int i = 1; ++count_compare && i < n; i++)
+    {
+        if (++count_compare && a[i] < minVal)
+            minVal = a[i];
+        if (++count_compare && a[i] > a[max])
+            max = i;
+    }
+    if (++count_compare && a[max] == minVal)
+        return;
+    double c1 = (double)(m - 1) / (a[max] - minVal);
+    for (int i = 0; ++count_compare && i < n; i++)
+    {
+        int k = int(c1 * (a[i] - minVal));
+        ++l[k];
+    }
+    for (int i = 1; ++count_compare && i < m; i++)
+        l[i] += l[i - 1];
+    HoanVi(a[max], a[0]);
+    int nmove = 0;
+    int j = 0;
+    int k = m - 1;
+    int t = 0;
+    int flash;
+    while (++count_compare && nmove < n - 1)
+    {
+        while (++count_compare && j > l[k] - 1)
+        {
+            j++;
+            k = int(c1 * (a[j] - minVal));
+        }
+        flash = a[j];
+        if (++count_compare && k < 0) break;
+        while (++count_compare && j != l[k])
+        {
+            k = int(c1 * (flash - minVal));
+            int hold = a[t = --l[k]];
+            a[t] = flash;
+            flash = hold;
+            ++nmove;
+        }
+    }
+    delete[] l;
+    insertionSort_compare(a, n, count_compare);
+}
+// A utility function to get maximum
+// value in arr[]
+int getMax(int arr[], int n)
+{
+    int mx = arr[0];
+    for (int i = 1; i < n; i++)
+        if (arr[i] > mx)
+            mx = arr[i];
+    return mx;
+}
+// A function to do counting sort of arr[]
+// according to the digit
+// represented by exp.
+void countSort(int arr[], int n, int exp)
+{
+
+    // Output array
+    int* output = new int[n];
+    int i, count[10] = { 0 };
+
+    // Store count of occurrences
+    // in count[]
+    for (i = 0; i < n; i++)
+        count[(arr[i] / exp) % 10]++;
+
+    // Change count[i] so that count[i]
+    // now contains actual position
+    // of this digit in output[]
+    for (i = 1; i < 10; i++)
+        count[i] += count[i - 1];
+
+    // Build the output array
+    for (i = n - 1; i >= 0; i--) {
+        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+        count[(arr[i] / exp) % 10]--;
+    }
+
+    // Copy the output array to arr[],
+    // so that arr[] now contains sorted
+    // numbers according to current digit
+    for (i = 0; i < n; i++)
+        arr[i] = output[i];
+    delete[] output;
+}
+// The main function to that sorts arr[]
+// of size n using Radix Sort
+void radixSort_time(int arr[], int n, double& time)
+{
+    clock_t start, end;
+
+    start = clock();
+
+    // Find the maximum number to
+    // know number of digits
+    int m = getMax(arr, n);
+
+    // Do counting sort for every digit.
+    // Note that instead of passing digit
+    // number, exp is passed. exp is 10^i
+    // where i is current digit number
+    for (int exp = 1; m / exp > 0; exp *= 10)
+        countSort(arr, n, exp);
+
+    end = clock();
+    time = (double)(end - start) / CLOCKS_PER_SEC;
+}
+int getMax_compare(int arr[], int n, long long& count_compare)
+{
+    int mx = arr[0];
+    for (int i = 1; ++count_compare && i < n; i++)
+        if (++count_compare && arr[i] > mx)
+            mx = arr[i];
+    return mx;
+}
+void countSort_compare(int arr[], int n, int exp, long long& count_compare)
+{
+    int* output = new int[n];
+    int i, count[10] = { 0 };
+
+    for (i = 0; ++count_compare && i < n; i++)
+        count[(arr[i] / exp) % 10]++;
+
+    for (i = 1; ++count_compare && i < 10; i++)
+        count[i] += count[i - 1];
+
+    for (i = n - 1; ++count_compare && i >= 0; i--) {
+        output[count[(arr[i] / exp) % 10] - 1] = arr[i];
+        count[(arr[i] / exp) % 10]--;
+    }
+
+    for (i = 0; ++count_compare && i < n; i++)
+        arr[i] = output[i];
+    delete[] output;
+}
+void radixSort_compare(int arr[], int n, long long& count_compare)
+{
+    count_compare = 0;
+    int m = getMax_compare(arr, n, count_compare);
+    for (int exp = 1; ++count_compare && m / exp > 0; exp *= 10)
+        countSort_compare(arr, n, exp, count_compare);
+}
+void flashSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        flashSort_compare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        flashSort_time(a, n, time);
+}
+void radixSort(int* a, int n, long long& count_compare, double& time, int typeCount)
+{
+    time = 0;
+    count_compare = 0;
+
+    if (typeCount == COMPARE || typeCount == BOTH)
+        radixSort_compare(a, n, count_compare);
+    if (typeCount == TIME || typeCount == BOTH)
+        radixSort_time(a, n, time);
+}
+
+
+
