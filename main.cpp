@@ -18,7 +18,6 @@ string outputPara[3] = { "-time", "-comp", "-both" };
 
 void main_debug()
 {
-	outputSort(500000, REVERSE, BOTH, H_SORT, "An_Sorting.txt");
 }
 
 int main(int argc, char** argv)

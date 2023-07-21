@@ -145,6 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="An_Sorting.txt" />
+    <Text Include="Kiet_Ascending.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

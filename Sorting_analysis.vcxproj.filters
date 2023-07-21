@@ -61,5 +61,8 @@
     <Text Include="An_Sorting.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="Kiet_Ascending.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

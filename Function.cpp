@@ -47,3 +47,35 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
 
     fp.close();
 }
+void duplicateArr(int* a, int* b, int n) {
+    for (int i = 0; i < n; i++) {
+        b[i] = a[i];
+    }
+}
+void outputSort_compare(int typeData, int typeCount, string filename) {
+    ofstream fp(filename, ios::app);
+    int n[] = { 10000, 30000, 50000, 100000, 300000, 500000 };
+    int* a = NULL;
+    pSort sort;
+    long long count_compare = 0;
+    int* copy = NULL;
+    double time;
+    for (int i = 0; i < 6; i++) {
+        GenerateData(a, n[i], typeData);
+        copy = new int[n[i]];
+        for (int j = 0; j < 11; j++) {
+            duplicateArr(a, copy, n[i]);
+            sort = listSort[i];
+            sort(copy, n[i], count_compare, time, COMPARE);
+            fp << count_compare << " ";
+        }
+        delete[] copy;
+        copy = NULL;
+        fp << endl;
+    }
+    if (a != NULL)
+        delete[] a;
+    if (copy != NULL)
+        delete[] copy;
+    fp.close();
+}
