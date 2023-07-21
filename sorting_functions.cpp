@@ -249,7 +249,7 @@ void mergeSort_countTime(int* a, int first, int last) {
     mergeSort_countTime(a, mid + 1, last);
     merge_countTime(a, first, mid, last);
 }
-//Counting sort
+//Counting Sort
 void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;
@@ -347,7 +347,7 @@ void countingSort_countTime(int* a, int n, double& time)
     delete[]C;
     return;
 }
-//Shell sort
+//Shell Sort
 void shellSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;
@@ -396,6 +396,7 @@ void shellSort_countTime(int* a, int n, double& time)
     end = clock();
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
+//Bubble Sort
 void bubbleSort_countCompare(int* a, int n, long long& count_compare)
 {
     count_compare = 0;
@@ -415,7 +416,6 @@ void bubbleSort_countCompare(int* a, int n, long long& count_compare)
             break;
     }
 }
-
 void bubbleSort_countTime(int* a, int n, double& time)
 {
     clock_t start, end;
@@ -438,7 +438,6 @@ void bubbleSort_countTime(int* a, int n, double& time)
     end = clock();
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
-
 void bubbleSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;
@@ -449,7 +448,6 @@ void bubbleSort(int* a, int n, long long& count_compare, double& time, int typeC
     if (typeCount == TIME || typeCount == BOTH)
         bubbleSort_countTime(a, n, time);
 }
-
 //Heap sort
 void heapify_compare(int* a, int i, int n, long long& count_compare)
 {
@@ -481,7 +479,6 @@ void heapSort_countCompare(int* a, int n, long long& count_compare)
         heapify_compare(a, 0, i, count_compare);
     }
 }
-
 void heapify_time(int* a, int i, int n)
 {
     int l = 2 * i + 1;
@@ -515,7 +512,6 @@ void heapSort_countTime(int* a, int n, double& time)
     end = clock();
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
-
 void heapSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;
@@ -526,7 +522,6 @@ void heapSort(int* a, int n, long long& count_compare, double& time, int typeCou
     if (typeCount == TIME || typeCount == BOTH)
         heapSort_countTime(a, n, time);
 }
-
 //Quick sort
 int partition_compare(int arr[], int l, int r, long long& count_compare)
 {
@@ -592,7 +587,6 @@ void quickSort_countCompare(int* a, int n, long long& count_compare)
 
     quickSort_compare(a, 0, n - 1, count_compare);
 }
-
 int partition_time(int arr[], int l, int r)
 {
     int pivot = arr[r];
@@ -610,7 +604,6 @@ int partition_time(int arr[], int l, int r)
     swap(arr[i + 1], arr[r]);
     return (i + 1);
 }
-
 void quickSort_time(int* a, int l, int r)
 {
     int* stack = new int[r - l + 1];
@@ -646,7 +639,6 @@ void quickSort_countTime(int* a, int n, double& time)
     end = clock();
     time = (double)(end - start) / CLOCKS_PER_SEC;
 }
-
 void quickSort(int* a, int n, long long& count_compare, double& time, int typeCount)
 {
     time = 0;

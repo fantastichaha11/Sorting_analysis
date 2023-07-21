@@ -17,27 +17,32 @@ using namespace std;
 #define C_SORT 8
 #define R_SORT 9
 #define F_SORT 10
-
+//Selection Sort
+void selectionSort(int* a, int n, long long& count_compare, double& time, int typeCount);
+void selectionSort_countCompare(int* a, int n, long long& count_compare);
+void selectionSort_countTime(int* a, int n, double& time);
+//Insertion Sort
 void insertionSort(int* a, int n, long long& count_compare, double& time, int typeCount);
 void insertionSort_countCompare(int* a, int n, long long& count_compare);
 void insertionSort_countTime(int* a, int n, double& time);
+//Shaker Sort
 void shakerSort(int* a, int n, long long& count_compare, double& time, int typeCount);
 void shakerSort_countTime(int* a, int n, double& time);
 void shakerSort_countCompare(int* a, int n, long long& count_compare);
+//Merge Sort
 void mergeSort(int* a, int n, long long& count_compare, double& time, int typeCount);
 void merge_countCompare(int* a, int first, int mid, int last, long long& count_compare);
 void mergeSort_countCompare(int* a, int first, int last, long long& count_compare);
 void merge_countTime(int* a, int first, int mid, int last);
 void mergeSort_countTime(int* a, int first, int last);
-void selectionSort_countCompare(int* a, int n, long long& count_compare);
-void selectionSort_countTime(int* a, int n, double& time);
+//Counting Sort
+void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount);
 void countingSort_countCompare(int* a, int n, long long& count_compare);
 void countingSort_countTime(int* a, int n, double& time);
+//Shell Sort
+void shellSort(int* a, int n, long long& count_compare, double& time, int typeCount);
 void shellSort_countCompare(int* a, int n, long long& count_compare);
 void shellSort_countTime(int* a, int n, double& time);
-void selectionSort(int* a, int n, long long& count_compare, double& time, int typeCount);
-void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount);
-void shellSort(int* a, int n, long long& count_compare, double& time, int typeCount);
 //Bubble sort
 void bubbleSort_countCompare(int* a, int n, long long& count_compare);
 void bubbleSort_countTime(int* a, int n, double& time);
