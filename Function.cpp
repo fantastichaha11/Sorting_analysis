@@ -96,8 +96,8 @@ void duplicateArr(int* a, int* b, int n) {
         b[i] = a[i];
     }
 }
-void outputSort_compare(int typeData, int typeCount, string filename) {
-    ofstream fp(filename, ios::app);
+void outputSort_kiet(int typeData, string filename) {
+    ofstream fp(filename, ios::trunc);
     int n[] = { 10000, 30000, 50000, 100000, 300000, 500000 };
     int* a = NULL;
     pSort sort;
@@ -107,11 +107,15 @@ void outputSort_compare(int typeData, int typeCount, string filename) {
     for (int i = 0; i < 6; i++) {
         GenerateData(a, n[i], typeData);
         copy = new int[n[i]];
+        fp << n[i] << ": ";
         for (int j = 0; j < 11; j++) {
             duplicateArr(a, copy, n[i]);
-            sort = listSort[i];
+            sort = listSort[j];
             sort(copy, n[i], count_compare, time, COMPARE);
-            fp << count_compare << " ";
+            fp << count_compare << "/";
+            duplicateArr(a, copy, n[i]);
+            sort(copy, n[i], count_compare, time, TIME);
+            fp << time << " ";
         }
         delete[] copy;
         copy = NULL;
