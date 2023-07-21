@@ -8,6 +8,7 @@ string inputOrder[4] = { "-rand", "-nsorted", "-sorted", "-rev" };
 string outputPara[3] = { "-time", "-comp", "-both" };
 
 int main() {
+	output_an();
 	return 0;
 }
 //void main_debug()
