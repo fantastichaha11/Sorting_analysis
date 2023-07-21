@@ -1,13 +1,4 @@
 #include "Function.h"
-#include "anTroc.h"
-#include "hieuHo.h"
-#include "pianoKiet.h"
-#include "sonOfABeach.h"
-#include "DataGenerator.h"
-#include <iostream>
-#include <fstream>
-#include <cmath>
-#include <time.h>
 
 void outputSort(int n, int typeData, int typeCount, int typeSort, string filename)
 {
@@ -15,35 +6,8 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
 
     int* a = NULL;
 
-    void (*sort) (int*, int, long long&, double&, int) = NULL;
+    pSort sort = listSort[typeSort];
 
-    if (typeSort == B_SORT)
-    {
-        sort = bubbleSort;
-        fp << "Bubble Sort: " << endl;
-    }
-    else if (typeSort == H_SORT)
-    {
-        sort = heapSort;
-        fp << "Heap Sort: " << endl;
-    }
-    else if (typeSort == Q_SORT)
-    {
-        sort = quickSort;
-        fp << "Quick Sort: " << endl;
-    }
-    else if (typeSort == M_SORT) {
-        sort = mergeSort;
-        fp << "Merge Sort: " << endl;
-    }
-    else if (typeSort == I_SORT) {
-        sort = insertionSort;
-        fp << "Insertion Sort: " << endl;
-    }
-    else if (typeSort == SHAKER_SORT) {
-        sort = shakerSort;
-        fp << "Shaker Sort: " << endl;
-    }
     long long count_compare = 0;
     double time = 0;
     if (typeCount == COMPARE)
