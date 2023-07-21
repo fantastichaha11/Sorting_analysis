@@ -1,7 +1,8 @@
 #include "DataGenerator.h"
 #include <iostream>
-#include <time.h>
 #include <fstream>
+#include <cmath>
+#include <time.h>
 #include <string>
 using namespace std;
 
