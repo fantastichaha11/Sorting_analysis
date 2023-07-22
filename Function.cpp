@@ -108,10 +108,7 @@ void outputSort_kiet(int typeData, string filename) {
             duplicateArr(a, copy, n[i]);
             sort = listSort[j];
             sort(copy, n[i], count_compare, time, COMPARE);
-            fp << count_compare << "/";
-            duplicateArr(a, copy, n[i]);
-            sort(copy, n[i], count_compare, time, TIME);
-            fp << time << " ";
+            fp << count_compare << " ";
         }
         delete[] copy;
         copy = NULL;
