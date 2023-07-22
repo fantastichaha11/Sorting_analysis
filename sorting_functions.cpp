@@ -467,7 +467,7 @@ void quickSort_compare(int* a, int l, int r, long long& count_compare)
 
         // Set pivot element at its correct position
         // in sorted array
-        int p = partition_time(a, l, r);
+        int p = partition_compare(a, l, r, count_compare);
 
         // If there are elements on left side of pivot,
         // then push left side to stack
