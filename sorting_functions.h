@@ -4,6 +4,7 @@
 #include <cmath>
 #include <time.h>
 #include <string>
+#include <string.h>
 using namespace std;
 #define S_SORT 0
 #define I_SORT 1

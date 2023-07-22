@@ -1,7 +1,12 @@
 #include "Function.h"
 
 #include <chrono>
+#include <sstream>
 using namespace std::chrono;
+
+typedef void(*pSort)(int*, int, long long&, double&, int);
+pSort listSort[11] = { selectionSort, insertionSort, bubbleSort, shakerSort, shellSort, heapSort,
+                        mergeSort, quickSort, countingSort, radixSort, flashSort };
 string listNameSort[11] = { "Selection Sort", "Insertion Sort", "Bubble Sort", "Shaker Sort", "Shell Sort", "Heap Sort",
                             "Merge Sort", "Quick Sort", "Counting Sort", "Radix Sort", "Flash Sort" };
 int listSize[6] = { 10000, 30000, 50000, 100000, 300000, 500000 };
@@ -34,8 +39,19 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
 
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
-        time = duration.count();
-        fp << time << endl;
+
+        string timeUnit = "ms";
+        if(duration.count() > 1000000)
+        {
+            time = (duration.count() * 1.0) / 1000000;
+            timeUnit = "s";
+        }
+		else
+        {
+            time = (duration.count() * 1.0);
+            timeUnit = "ms";
+        }
+        fp << time << " " << timeUnit << endl;
     }
     else 
     {
@@ -50,12 +66,23 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
         fp << "\tTime: ";
         auto start = high_resolution_clock::now();
 
-        sort(b, n, count_compare, time, TIME);
+        sort(a, n, count_compare, time, TIME);
 
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<microseconds>(stop - start);
-        time = duration.count();
-        fp << time << endl;
+
+        string timeUnit = "ms";
+        if (duration.count() > 1000000)
+        {
+            time = (duration.count() * 1.0) / 1000000;
+            timeUnit = "s";
+        }
+        else
+        {
+            time = (duration.count() * 1.0);
+            timeUnit = "ms";
+        }
+        fp << time << " " << timeUnit << endl;
 
         delete[]  b;
     }
@@ -66,24 +93,74 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
     fp.close();
 }
 
+void convertFile(string fileIn, string fileOut)
+{
+    ifstream fpIn(fileIn);
+    ofstream fpOut(fileOut);
+
+    string line;
+
+    while (getline(fpIn, line))
+    {
+        size_t found = line.find("Time:");
+        if (found != std::string::npos)
+        {
+            stringstream ss(line);
+
+            string unit;
+            double time;
+
+            ss >> unit >> time;
+
+            if (time > 1000000)
+            {
+                unit = "s";
+                time = time / 1000000;
+            }
+            else
+            {
+				unit = "ms";
+			}
+            fpOut << "\tTime: ";
+            fpOut << time << " " << unit << endl;
+        }
+        else
+        {
+			fpOut << line << endl;
+		}
+    }
+
+    fpIn.close();
+    fpOut.close();
+}
+
 void output_an()
 {
-    for (int dataType = 0; dataType < 4; dataType++)
+    //for (int dataType = 0; dataType < 4; dataType++) //3.nsort
+    //{
+    //    for (int size = 0; size < 6; size++) //4.300000
+    //    {
+    //        for(int typeSort = 0; typeSort < 11; typeSort++) //7.qsort
+    //        {
+    //            if (dataType == RANDOM)
+    //            {
+    //                outputSort(listSize[size], dataType, BOTH, typeSort, "An_Sorting.txt");
+    //            }
+    //            else
+    //            {
+    //                outputSort(listSize[size], dataType, TIME, typeSort, "An_Sorting.txt");
+    //            }
+    //        }
+    //    }
+    //}
+    for (int typeSort = 7; typeSort < 11; typeSort++)
     {
-        for (int size = 0; size < 6; size++)
-        {
-            for(int typeSort = 0; typeSort < 11; typeSort++)
-            {
-                if (dataType == RANDOM)
-                {
-                    outputSort(listSize[size], dataType, BOTH, typeSort, "An_Sorting.txt");
-                }
-                else
-                {
-                    outputSort(listSize[size], dataType, TIME, typeSort, "An_Sorting.txt");
-                }
-            }
-        }
+        outputSort(listSize[4], N_SORTED, TIME, typeSort, "An_Sorting_2.txt");
+    }
+
+    for (int typeSort = 0; typeSort < 11; typeSort++)
+    {
+        outputSort(listSize[5], N_SORTED, TIME, typeSort, "An_Sorting_2.txt");
     }
 }
 
