@@ -9,7 +9,7 @@ string inputOrder[4] = { "-rand", "-nsorted", "-sorted", "-rev" };
 string outputPara[3] = { "-time", "-comp", "-both" };
 
 int main() {
-	
+	outputSort(500000, RANDOM, TIME, M_SORT, "An_Sorting.txt");
 	return 0;
 }
 //void main_debug()

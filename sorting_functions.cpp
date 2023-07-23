@@ -379,47 +379,71 @@ void mergeSort_countCompare(int* a, int first, int last, long long& count_compar
     if (++count_compare && first >= last) {
         return;
     }
-    int mid = (first + last) / 2;
+    int mid = first + (last - first) / 2;
     mergeSort_countCompare(a, first, mid, count_compare);
     mergeSort_countCompare(a, mid + 1, last, count_compare);
     merge_countCompare(a, first, mid, last, count_compare);
 }
-void merge_countTime(int* a, int first, int mid, int last) {
-    int* temp = new int[last + 1];
-    int f1 = first, l1 = mid;
-    int f2 = mid + 1, l2 = last;
-    int i = first;
-    while ((f1 <= l1) && (f2 <= l2)) {
-        if (a[f1] <= a[f2]) {
-            temp[i] = a[f1];
-            f1++;
+void merge_countTime(int* array, int left, int mid, int right) {
+    int const subArrayOne = mid - left + 1;
+    int const subArrayTwo = right - mid;
+
+    // Create temp arrays
+    auto* leftArray = new int[subArrayOne],
+        * rightArray = new int[subArrayTwo];
+
+    // Copy data to temp arrays leftArray[] and rightArray[]
+    for (auto i = 0; i < subArrayOne; i++)
+        leftArray[i] = array[left + i];
+    for (auto j = 0; j < subArrayTwo; j++)
+        rightArray[j] = array[mid + 1 + j];
+
+    auto indexOfSubArrayOne = 0, indexOfSubArrayTwo = 0;
+    int indexOfMergedArray = left;
+
+    // Merge the temp arrays back into array[left..right]
+    while (indexOfSubArrayOne < subArrayOne
+        && indexOfSubArrayTwo < subArrayTwo) {
+        if (leftArray[indexOfSubArrayOne]
+            <= rightArray[indexOfSubArrayTwo]) {
+            array[indexOfMergedArray]
+                = leftArray[indexOfSubArrayOne];
+            indexOfSubArrayOne++;
         }
         else {
-            temp[i] = a[f2];
-            f2++;
+            array[indexOfMergedArray]
+                = rightArray[indexOfSubArrayTwo];
+            indexOfSubArrayTwo++;
         }
-        i++;
+        indexOfMergedArray++;
     }
-    while (f1 <= l1) {
-        temp[i] = a[f1];
-        i++;
-        f1++;
+
+    // Copy the remaining elements of
+    // left[], if there are any
+    while (indexOfSubArrayOne < subArrayOne) {
+        array[indexOfMergedArray]
+            = leftArray[indexOfSubArrayOne];
+        indexOfSubArrayOne++;
+        indexOfMergedArray++;
     }
-    while (f2 <= l2) {
-        temp[i] = a[f2];
-        f2++;
-        i++;
+
+    // Copy the remaining elements of
+    // right[], if there are any
+    while (indexOfSubArrayTwo < subArrayTwo) {
+        array[indexOfMergedArray]
+            = rightArray[indexOfSubArrayTwo];
+        indexOfSubArrayTwo++;
+        indexOfMergedArray++;
     }
-    for (i = first; i <= last; i++) {
-        a[i] = temp[i];
-    }
-    delete[] temp;
+    delete[] leftArray;
+    delete[] rightArray;
 }
+
 void mergeSort_countTime(int* a, int first, int last) {
     if (first >= last) {
         return;
     }
-    int mid = (first + last) / 2;
+    int mid = first + (last - first) / 2;
     mergeSort_countTime(a, first, mid);
     mergeSort_countTime(a, mid + 1, last);
     merge_countTime(a, first, mid, last);

@@ -30,10 +30,11 @@ void shakerSort(int* a, int n, long long& count_compare, double& time, int typeC
 void shakerSort_countTime(int* a, int n, double& time);
 void shakerSort_countCompare(int* a, int n, long long& count_compare);
 //Merge Sort
+void Merge(int* a, int l, int r, int m);
 void mergeSort(int* a, int n, long long& count_compare, double& time, int typeCount);
 void merge_countCompare(int* a, int first, int mid, int last, long long& count_compare);
 void mergeSort_countCompare(int* a, int first, int last, long long& count_compare);
-void merge_countTime(int* a, int first, int mid, int last);
+void merge_countTime(int* array, int left, int mid, int right);
 void mergeSort_countTime(int* a, int first, int last);
 //Counting Sort
 void countingSort(int* a, int n, long long& count_compare, double& time, int typeCount);
