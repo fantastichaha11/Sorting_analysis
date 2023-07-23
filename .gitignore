@@ -369,3 +369,5 @@ FodyWeavers.xsd
 /Reverse_Time.txt
 /Random_Time.txt
 /Sorted_Time.txt
+/NearlySorted_Compare.txt
+/NearlySort_Time.txt
