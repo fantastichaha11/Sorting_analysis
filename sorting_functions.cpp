@@ -350,7 +350,7 @@ void merge_countCompare(int* a, int first, int mid, int last, long long& count_c
     int f2 = mid + 1, l2 = last;
     int i = first;
     while (count_compare++ && (f1 <= l1) && count_compare++ && (f2 <= l2)) {
-        if (count_compare += 2 && a[f1] <= a[f2]) {
+        if (count_compare ++ && a[f1] <= a[f2]) {
             temp[i] = a[f1];
             f1++;
         }
@@ -376,7 +376,7 @@ void merge_countCompare(int* a, int first, int mid, int last, long long& count_c
     delete[] temp;
 }
 void mergeSort_countCompare(int* a, int first, int last, long long& count_compare) {
-    if (count_compare += 2 && first >= last) {
+    if (count_compare ++ && first >= last) {
         return;
     }
     int mid = (first + last) / 2;
