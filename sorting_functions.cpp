@@ -611,12 +611,7 @@ void countingSort_countTime(int* a, int n, double& time)
     }
 
     int* S = new int[n];
-    int* C = new int[k + 1];
-
-    for (int j = 0; j <= k; j++)
-    {
-        C[j] = 0;
-    }
+    int* C = new int[k + 1] {0};
 
     for (int i = 0; i < n; i++)
     {
