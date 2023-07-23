@@ -48,13 +48,6 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
         }
 		else
         {
-            time = (duration.count() * 1.0);
-            timeUnit = "ms";
-        }
-        fp << time << " " << timeUnit << endl;
-    }
-    else 
-    {
         int* b = new int[n];
         for (int i = 0; i < n; i++)
             b[i] = a[i];
