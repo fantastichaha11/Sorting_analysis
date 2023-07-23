@@ -573,12 +573,7 @@ void countingSort_countCompare(int* a, int n, long long& count_compare)
     }
 
     int* S = new int[n];
-    int* C = new int[k + 1];
-
-    for (int j = 0; ++count_compare && j <= k; j++)
-    {
-        C[j] = 0;
-    }
+    int* C = new int[k + 1] {0};
 
     for (int i = 0; ++count_compare && i < n; i++)
     {

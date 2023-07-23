@@ -87,7 +87,7 @@ void ouputRandom(string compareFile, string timeFile, int typeData)
             double time = 0;
             pSort sort = listSort[typeSort];
 
-            if(typeData == RANDOM)
+            if(typeData != N_SORTED)
             {
                 sort(copy, listSize[size], count_compare, time, COMPARE);
                 fpCompare << count_compare << " ";
@@ -125,7 +125,7 @@ void output_an()
     int* a = NULL;
     int* copy = NULL;
 
-    for (int dataType = 1; dataType < 3; dataType++)
+    for (int dataType = 1; dataType < 2; dataType++)
     {
         fp.open(listData[dataType] + "_Time.txt", ios::trunc);
 
@@ -160,6 +160,7 @@ void output_an()
         delete[] a;
     }
 
+    ouputRandom("Reverse_Compare.txt", "Reverse_Time.txt", N_SORTED);
     ouputRandom("NearlySorted_Compare.txt", "NearlySort_Time.txt", N_SORTED);
 }
 

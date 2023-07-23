@@ -9,7 +9,7 @@ string inputOrder[4] = { "-rand", "-nsorted", "-sorted", "-rev" };
 string outputPara[3] = { "-time", "-comp", "-both" };
 
 int main() {
-	int n[] = { 10000, 30000, 50000, 100000, 300000, 500000 };
+	/*int n[] = { 10000, 30000, 50000, 100000, 300000, 500000 };
 	int* a = NULL;
 	double time = 0;
 	long long compare = 0;
@@ -19,7 +19,8 @@ int main() {
 		mergeSort(a, n[i], compare, time, COMPARE);
 		cout << compare << " ";
 		delete[] a;
-	}
+	}*/
+	outputSort(500000, RANDOM, TIME, H_SORT, "An_Sorting.txt");
 	return 0;
 }
 //void main_debug()
