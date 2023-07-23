@@ -37,16 +37,9 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
         sort(a, n, count_compare, time, TIME);
 
         auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<milliseconds>(stop - start);
+        auto duration = duration_cast<microseconds>(stop - start);
 
-        string timeUnit = "ms";
-        time = (duration.count() * 1.0);
-        /*if(duration.count() > 1000000)
-        {
-            time = (duration.count() * 1.0) / 1000000;
-            timeUnit = "s";
-        }*/
-        fp << time << endl;
+        fp << duration.count() << endl;
     }
     else 
     {
@@ -71,48 +64,7 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
     fp.close();
 }
 
-void convertFile(string fileIn, string fileOut)
-{
-    ifstream fpIn(fileIn);
-    ofstream fpOut(fileOut);
-
-    string line;
-
-    while (getline(fpIn, line))
-    {
-        size_t found = line.find("Time:");
-        if (found != std::string::npos)
-        {
-            stringstream ss(line);
-
-            string unit;
-            double time;
-
-            ss >> unit >> time;
-
-            if (time > 1000000)
-            {
-                unit = "s";
-                time = time / 1000000;
-            }
-            else
-            {
-				unit = "ms";
-			}
-            fpOut << "\tTime: ";
-            fpOut << time << " " << unit << endl;
-        }
-        else
-        {
-			fpOut << line << endl;
-		}
-    }
-
-    fpIn.close();
-    fpOut.close();
-}
-
-void ouputRandom(string compareFile, string timeFile)
+void ouputRandom(string compareFile, string timeFile, int typeData)
 {
     ofstream fpCompare(compareFile, ios::trunc);
     ofstream fpTime(timeFile, ios::trunc);
@@ -122,7 +74,7 @@ void ouputRandom(string compareFile, string timeFile)
 
     for (int size = 0; size < 6; size++)
     {
-        GenerateData(a, listSize[size], RANDOM);
+        GenerateData(a, listSize[size], typeData);
         copy = new int[listSize[size]];
 
         fpCompare << listSize[size] << ": ";
@@ -135,10 +87,13 @@ void ouputRandom(string compareFile, string timeFile)
             double time = 0;
             pSort sort = listSort[typeSort];
 
-            sort(copy, listSize[size], count_compare, time, COMPARE);
-            fpCompare << count_compare << " ";
+            if(typeData == RANDOM)
+            {
+                sort(copy, listSize[size], count_compare, time, COMPARE);
+                fpCompare << count_compare << " ";
 
-            duplicateArr(a, copy, listSize[size]);
+                duplicateArr(a, copy, listSize[size]);
+            }
 
             auto start = high_resolution_clock::now();
             sort(copy, listSize[size], count_compare, time, TIME);
@@ -162,7 +117,7 @@ void ouputRandom(string compareFile, string timeFile)
 
 void output_an()
 {
-    ouputRandom("Random_Compare.txt", "Random_Time.txt");
+    ouputRandom("Random_Compare.txt", "Random_Time.txt", RANDOM);
 
     ofstream fp;
     string filename;
@@ -170,13 +125,13 @@ void output_an()
     int* a = NULL;
     int* copy = NULL;
 
-    for (int dataType = 1; dataType < 4; dataType++)
+    for (int dataType = 1; dataType < 3; dataType++)
     {
         fp.open(listData[dataType] + "_Time.txt", ios::trunc);
 
         for (int size = 0; size < 6; size++)
         {
-            GenerateData(a, listSize[size], RANDOM);
+            GenerateData(a, listSize[size], dataType);
             copy = new int[listSize[size]];
 
             fp << listSize[size] << ": ";
@@ -204,6 +159,8 @@ void output_an()
     {
         delete[] a;
     }
+
+    ouputRandom("NearlySorted_Compare.txt", "NearlySort_Time.txt", N_SORTED);
 }
 
 void duplicateArr(int* a, int* b, int n) {

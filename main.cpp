@@ -1,5 +1,6 @@
 #include "Function.h"
 #include "sorting_functions.h"
+#include <cstdlib>
 
 string mode[2] = { "-a", "-c" };
 string algoName[11] = { "selection-sort", "insertion-sort", "bubble-sort", "shaker-sort", "shell-sort", "heap-sort",
@@ -8,7 +9,7 @@ string inputOrder[4] = { "-rand", "-nsorted", "-sorted", "-rev" };
 string outputPara[3] = { "-time", "-comp", "-both" };
 
 int main() {
-	output_an();
+	
 	return 0;
 }
 //void main_debug()
