@@ -197,3 +197,61 @@ void outputSort_kiet(int typeData, string filename) {
         delete[] copy;
     fp.close();
 }
+
+void printCMD4(string algo1, string algo2, string var1, int n)
+{
+    cout << "Algorithm: " << algo1 << " | " << algo2 << endl;
+    cout << "Input file: " << var1 << endl;
+    cout << "Input size: " << n << endl;
+    cout << "---------------------------------" << endl;
+    double time1 = 0; double time2 = 0;
+    long long compare1 = 0; long long compare2 = 0;
+    cout << "Running time: " << algo1 << " | " << algo2 << endl;
+    cout << "Comparisons: " << algo1 << " | " << algo2 << endl;
+    return;
+}
+
+void printCMD4(int algo1, int algo2, string var1, int* arr, int n)
+{
+    cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
+    cout << "Input file: " << var1 << endl;
+    cout << "Input size: " << n << endl;
+    cout << "---------------------------------" << endl;
+    double time1 = 0; double time2 = 0;
+    long long compare1 = 0; long long compare2 = 0;
+    pSort sort1 = listSort[algo1];
+    pSort sort2 = listSort[algo2];
+    sort1(arr, n, compare1, time1, COMPARE);
+    sort1(arr, n, compare1, time1, TIME);
+    //-------------------------------------------------------------------
+    sort2(arr, n, compare2, time2, COMPARE);
+    sort2(arr, n, compare2, time2, TIME);
+
+    cout << "Running time: " << time1 << " | " << time2 << endl;
+    cout << "Comparisons: " << compare1 << " | " << compare2 << endl;
+    return;
+}
+
+void printCMD5(int algo1, int algo2, string var2, int* arr, int n)
+{
+    cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
+    cout << "Input size: " << n << endl;
+    cout << "Input size: " << stoi(var2) << endl;
+    cout << "---------------------------------" << endl;
+    double time1 = 0; double time2 = 0;
+    long long compare1 = 0; long long compare2 = 0;
+    pSort sort1 = listSort[algo1];
+    pSort sort2 = listSort[algo2];
+    sort1(arr, n, compare1, time1, COMPARE);
+    sort1(arr, n, compare1, time1, TIME);
+    //-------------------------------------------------------------------
+    sort2(arr, n, compare2, time2, COMPARE);
+    sort2(arr, n, compare2, time2, TIME);
+
+    cout << "Running time: " << time1 << " | " << time2 << endl;
+    cout << "Comparisons: " << compare1 << " | " << compare2 << endl;
+    return;
+}
+
+
+
