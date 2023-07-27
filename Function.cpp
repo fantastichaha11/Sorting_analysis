@@ -255,5 +255,104 @@ void printCMD5(int algo1, int algo2, string var2, int* arr, int n)
     return;
 }
 
+bool KeySearch(string key, string arr[], int n, short& code)
+{
+    for (int i = 0; i < n; i++)
+    {
+        if (arr[i] == key)
+        {
+            code = i;
+            return true;
+        }
+    }
+    return false;
+}
 
+void readInputFile(string fileName, int*& a, int& n)
+{
+    ifstream fp(fileName);
+    fp >> n;
+    if (a != NULL)
+    {
+        delete[] a;
+    }
+    a = new int[n];
+    for (int i = 0; i < n; i++)
+    {
+        fp >> a[i];
+    }
+    fp.close();
+}
 
+void printResult(short orderCode, short outputCode, double time, long long count_compare)
+{
+    cout << "Input order: " << listData[orderCode] << endl;
+    cout << "---------------------------------\n";
+    if (outputCode == TIME || outputCode == BOTH)
+    {
+        cout << "Running time: " << time << endl;
+    }
+    if (outputCode == COMPARE || outputCode == BOTH)
+    {
+        cout << "Comparisons: " << count_compare << endl;
+    }
+}
+
+void printCMD1(short algoCode, string fileName, short outputCode)
+{
+    int* a = NULL;
+    int n;
+    double time = 0;
+    long long count_compare = 0;
+    pSort sort = listSort[algoCode];
+    sort(a, n, count_compare, time, outputCode);
+    readInputFile(fileName, a, n);
+    cout << "ALGORITHM MODE\n";
+    cout << "Algorithm: " << listNameSort[algoCode] << endl;
+    cout << "Input file: " << fileName << endl;
+    cout << "Input size: " << n << endl;
+    cout << "---------------------------------\n";
+
+    if (outputCode == TIME || outputCode == BOTH)
+    {
+        cout << "Running time: " << time << endl;
+    }
+    if (outputCode == COMPARE || outputCode == BOTH)
+    {
+        cout << "Comparisons: " << count_compare << endl;
+    }
+}
+
+void printCMD2(short algoCode, int inputSize, short orderCode, short outputCode)
+{
+    int* a = NULL;
+    int n = inputSize;
+    double time = 0;
+    long long count_compare = 0;
+    pSort sort = listSort[algoCode];
+    GenerateData(a, n, orderCode);
+    sort(a, n, count_compare, time, outputCode);
+    cout << "ALGORITHM MODE\n";
+    cout << "Algorithm: " << listNameSort[algoCode] << endl;
+    cout << "Input size: " << n << endl;
+    printResult(orderCode, outputCode, time, count_compare);
+}
+
+void printCMD3(short algoCode, int inputSize, short outputCode)
+{
+    pSort sort = listSort[algoCode];
+    cout << "ALGORITHM MODE\n";
+    cout << "Algorithm: " << listNameSort[algoCode] << endl;
+    cout << "Input size: " << inputSize << endl;
+    for (int i = 0; i < 4; i++)
+    {
+        int* a = NULL;
+        int n = inputSize;
+        double time = 0;
+        long long count_compare = 0;
+        GenerateData(a, n, i);
+        sort(a, n, count_compare, time, outputCode);
+        printResult(i, outputCode, time, count_compare);
+        cout << endl;
+    }
+}

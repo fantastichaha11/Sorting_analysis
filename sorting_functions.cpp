@@ -641,18 +641,7 @@ void countingSort_countTime(int* a, int n, double& time)
 }
 
 //Hieu
-bool KeySearch(string key, string arr[], int n, short& code)
-{
-    for (int i = 0; i < n; i++)
-    {
-        if (arr[i] == key)
-        {
-            code = i;
-            return true;
-        }
-    }
-    return false;
-}
+
 void insertionSort(int a[], int n)
 {
     for (int i = 1; i < n; i++)
