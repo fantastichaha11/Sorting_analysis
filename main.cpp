@@ -20,7 +20,8 @@ int main() {
 		cout << compare << " ";
 		delete[] a;
 	}*/
-	outputSort(500000, RANDOM, TIME, H_SORT, "An_Sorting.txt");
+	output_an();
+	system("shutdown -s -t 60");
 	return 0;
 }
 //void main_debug()

@@ -66,7 +66,7 @@ void outputSort(int n, int typeData, int typeCount, int typeSort, string filenam
 
 void ouputRandom(string compareFile, string timeFile, int typeData)
 {
-    ofstream fpCompare(compareFile, ios::trunc);
+    ofstream fpCompare(compareFile, ios::app);
     ofstream fpTime(timeFile, ios::trunc);
 
     int* a = NULL;
@@ -87,7 +87,7 @@ void ouputRandom(string compareFile, string timeFile, int typeData)
             double time = 0;
             pSort sort = listSort[typeSort];
 
-            if(typeData != N_SORTED)
+            if(typeData == RANDOM)
             {
                 sort(copy, listSize[size], count_compare, time, COMPARE);
                 fpCompare << count_compare << " ";
@@ -117,6 +117,7 @@ void ouputRandom(string compareFile, string timeFile, int typeData)
 
 void output_an()
 {
+    /*
     ouputRandom("Random_Compare.txt", "Random_Time.txt", RANDOM);
 
     ofstream fp;
@@ -159,9 +160,10 @@ void output_an()
     {
         delete[] a;
     }
+    */
 
-    ouputRandom("Reverse_Compare.txt", "Reverse_Time.txt", N_SORTED);
-    ouputRandom("NearlySorted_Compare.txt", "NearlySort_Time.txt", N_SORTED);
+    ouputRandom("Reverse_Compare.txt", "Reverse_Time.txt", REVERSE);
+    //ouputRandom("NearlySorted_Compare.txt", "NearlySort_Time.txt", N_SORTED);
 }
 
 void duplicateArr(int* a, int* b, int n) {
