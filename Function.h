@@ -15,5 +15,7 @@ void output_an();
 
 bool KeySearch(string key, string arr[], int n, short& code);
 void readInputFile(string fileName, int*& a, int& n);
-void printResult(short outputCode, double time, long long count_compare);
+void printResult(short orderCode, short outputCode, double time, long long count_compare);
 void printCMD1(short algoCode, string fileName, short outputCode);
+void printCMD2(short algoCode, int inputSize, short orderCode, short outputCode);
+void printCMD3(short algoCode, int inputSize, short outputCode);

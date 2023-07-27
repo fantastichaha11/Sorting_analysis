@@ -55,7 +55,7 @@ int main(int argc, char** argv)
 						short outputCode;
 						if (KeySearch(argv[4], outputPara, 3, outputCode))
 						{
-							cout << "cmd1\n";
+							printCMD1(algoCode, filename, outputCode);
 						}
 						else
 						{
@@ -73,7 +73,7 @@ int main(int argc, char** argv)
 								short outputCode;
 								if (KeySearch(argv[5], outputPara, 3, outputCode))
 								{
-									cout << "cmd2\n";
+									printCMD2(algoCode, inputSize, orderCode, outputCode);
 								}
 								else
 								{
@@ -90,7 +90,7 @@ int main(int argc, char** argv)
 							short outputCode;
 							if (KeySearch(argv[4], outputPara, 3, outputCode))
 							{
-								cout << "cmd3\n";
+								printCMD3(algoCode, inputSize, outputCode);
 							}
 							else
 							{
