@@ -109,7 +109,8 @@ int main(int argc, char** argv)
 				short algoCode1, algoCode2;
 				if (strstr(argv[4], ".txt") != NULL)
 				{
-					Compare_mode(argv[4], argv[2], argv[3], inputOrder, 0, 4);
+					int n = 0;
+					Compare_mode(argv[4], argv[2], argv[3], inputOrder, n, 4);
 				}
 				else
 				{
