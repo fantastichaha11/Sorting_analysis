@@ -107,30 +107,15 @@ int main(int argc, char** argv)
 			else
 			{
 				short algoCode1, algoCode2;
-				if (KeySearch(argv[2], algoName, 11, algoCode1) && KeySearch(argv[3], algoName, 11, algoCode2))
+				if (strstr(argv[4], ".txt") != NULL)
 				{
-					if (strstr(argv[4], ".txt") != NULL)
-					{
-						string filename = argv[4];
-						cout << "cmd4\n";
-					}
-					else
-					{
-						int inputSize = stoi(string(argv[4]));
-						short orderCode;
-						if (KeySearch(argv[5], inputOrder, 4, orderCode))
-						{
-							cout << "cmd5\n";
-						}
-						else
-						{
-							cout << "Invalid input order name\n";
-						}
-					}
+					Compare_mode(argv[4], argv[2], argv[3], inputOrder, 0, 4);
 				}
 				else
 				{
-					cout << "Invalid algorithm name\n";
+					int inputSize = stoi(string(argv[4]));
+				 	Compare_mode(argv[5], argv[2], argv[3], inputOrder, inputSize, 5);
+
 				}
 			}
 		}
