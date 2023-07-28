@@ -98,60 +98,48 @@ void outputSort_kiet(int typeData, string filename) {
     fp.close();
 }
 
-void printCMD4(string algo1, string algo2, string var1, int n)
-{
-    cout << "Algorithm: " << algo1 << " | " << algo2 << endl;
-    cout << "Input file: " << var1 << endl;
-    cout << "Input size: " << n << endl;
-    cout << "---------------------------------" << endl;
-    double time1 = 0; double time2 = 0;
-    long long compare1 = 0; long long compare2 = 0;
-    cout << "Running time: " << algo1 << " | " << algo2 << endl;
-    cout << "Comparisons: " << algo1 << " | " << algo2 << endl;
-    return;
-}
 
-void printCMD4(int algo1, int algo2, string var1, int* arr, int n)
-{
-    cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
-    cout << "Input file: " << var1 << endl;
-    cout << "Input size: " << n << endl;
-    cout << "---------------------------------" << endl;
-    double time1 = 0; double time2 = 0;
-    long long compare1 = 0; long long compare2 = 0;
-    pSort sort1 = listSort[algo1];
-    pSort sort2 = listSort[algo2];
-    sort1(arr, n, compare1, time1, COMPARE);
-    sort1(arr, n, compare1, time1, TIME);
-    //-------------------------------------------------------------------
-    sort2(arr, n, compare2, time2, COMPARE);
-    sort2(arr, n, compare2, time2, TIME);
-
-    cout << "Running time: " << time1 << " | " << time2 << endl;
-    cout << "Comparisons: " << compare1 << " | " << compare2 << endl;
-    return;
-}
-
-void printCMD5(int algo1, int algo2, string var2, int* arr, int n)
-{
-    cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
-    cout << "Input size: " << n << endl;
-    cout << "Input size: " << stoi(var2) << endl;
-    cout << "---------------------------------" << endl;
-    double time1 = 0; double time2 = 0;
-    long long compare1 = 0; long long compare2 = 0;
-    pSort sort1 = listSort[algo1];
-    pSort sort2 = listSort[algo2];
-    sort1(arr, n, compare1, time1, COMPARE);
-    sort1(arr, n, compare1, time1, TIME);
-    //-------------------------------------------------------------------
-    sort2(arr, n, compare2, time2, COMPARE);
-    sort2(arr, n, compare2, time2, TIME);
-
-    cout << "Running time: " << time1 << " | " << time2 << endl;
-    cout << "Comparisons: " << compare1 << " | " << compare2 << endl;
-    return;
-}
+//void printCMD4(int algo1, int algo2, string var1, int* arr, int n)
+//{
+//    cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
+//    cout << "Input file: " << var1 << endl;
+//    cout << "Input size: " << n << endl;
+//    cout << "---------------------------------" << endl;
+//    double time1 = 0; double time2 = 0;
+//    long long compare1 = 0; long long compare2 = 0;
+//    pSort sort1 = listSort[algo1];
+//    pSort sort2 = listSort[algo2];
+//    sort1(arr, n, compare1, time1, COMPARE);
+//    sort1(arr, n, compare1, time1, TIME);
+//    //-------------------------------------------------------------------
+//    sort2(arr, n, compare2, time2, COMPARE);
+//    sort2(arr, n, compare2, time2, TIME);
+//
+//    cout << "Running time: " << time1 << " | " << time2 << endl;
+//    cout << "Comparisons: " << compare1 << " | " << compare2 << endl;
+//    return;
+//}
+//
+//void printCMD5(int algo1, int algo2, string var2, int* arr, int n)
+//{
+//    cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
+//    cout << "Input size: " << n << endl;
+//    cout << "Input size: " << stoi(var2) << endl;
+//    cout << "---------------------------------" << endl;
+//    double time1 = 0; double time2 = 0;
+//    long long compare1 = 0; long long compare2 = 0;
+//    pSort sort1 = listSort[algo1];
+//    pSort sort2 = listSort[algo2];
+//    sort1(arr, n, compare1, time1, COMPARE);
+//    sort1(arr, n, compare1, time1, TIME);
+//    //-------------------------------------------------------------------
+//    sort2(arr, n, compare2, time2, COMPARE);
+//    sort2(arr, n, compare2, time2, TIME);
+//
+//    cout << "Running time: " << time1 << " | " << time2 << endl;
+//    cout << "Comparisons: " << compare1 << " | " << compare2 << endl;
+//    return;
+//}
 
 bool KeySearch(string key, string arr[], int n, short& code)
 {
@@ -288,4 +276,89 @@ void printCMD3(short algoCode, int inputSize, short outputCode)
         printResult(i, outputCode, time, count_compare);
         cout << endl;
     }
+}
+
+void Compare_mode(string var1, string var2, string algo1, string algo2, int& n, int cmd) {
+    short first_algo = -1;
+    short second_algo = -1;
+    KeySearch(algo1, listNameSort, 11, first_algo);
+    KeySearch(algo2, listNameSort, 11, second_algo);
+    if (first_algo == -1 || second_algo == -1) {
+        cout << "Invalid algorithms";
+        return;
+    }
+    int* arr = NULL;
+    if (cmd == 4) {
+        int a;
+        n = 0;
+        ifstream read;
+        read.open(var1, ios::in);
+        if (read.fail()) {
+            cout << "Can not read " << var1 << endl;
+            return;
+        }
+        while (read >> a) n++;
+        read.seekg(0, ios::beg);
+        arr = new int[n];
+        for (int i = 0; i < n; i++) {
+            read >> arr[i];
+        }
+        read.close();
+        cout << "Algorithm: " << algo1 << " | " << algo2 << endl;
+        cout << "Input file: " << var1 << endl;
+        cout << "Input size: " << n << endl;
+        cout << "---------------------------------" << endl;
+    }
+    else if (cmd == 5) {
+        //KeySearch for the order of sort
+        short order = -1;
+        KeySearch(var2, listData, 4, order);
+        if (order == -1) {
+            cout << "Invalid input order";
+            return;
+        }
+        arr = new int[n];
+        GenerateData(arr, n, order);
+        cout << "Algorithm: " << algo1 << " | " << algo2 << endl;
+        cout << "Input size: " << n << endl;
+        cout << "Input order: " << var2 << endl;
+        cout << "---------------------------------" << endl;
+    }
+    printCMD45(arr, n, first_algo, second_algo);
+}
+
+void printCMD45(int* arr, int n, short algo1, short algo2)
+{
+    int* copy = new int[n];
+    long long compare1 = 0; long long compare2 = 0;
+    double time1 = 0; double time2 = 0;
+    pSort sort1 = listSort[algo1];
+    pSort sort2 = listSort[algo2];
+    duplicateArr(arr, copy, n);
+
+    //Calculate comparisons of the first sort algorithm
+    sort1(copy, n, compare1, time1, COMPARE);
+
+    //Calculate time of the first sort algorithm
+    duplicateArr(arr, copy, n);
+    auto start1 = high_resolution_clock::now();
+    sort1(copy, n, compare1, time1, TIME);
+    auto stop1 = high_resolution_clock::now();
+    auto duration1 = duration_cast<microseconds>(stop1 - start1);
+
+    //Calculate comparisons of the second sort algorithm
+    duplicateArr(arr, copy,n);
+    sort2(copy, n, compare2, time2, COMPARE);
+
+    //Calculate time of the second sort algorithm
+    duplicateArr(arr, copy, n);
+    auto start2 = high_resolution_clock::now();
+    sort2(copy, n, compare2, time2, TIME);
+    auto stop2 = high_resolution_clock::now();
+    auto duration2 = duration_cast<microseconds>(stop2 - start2);
+
+    //Print ouput
+    cout << "Running time: " << duration1.count() << " | " << duration2.count() << " (in microseconds)" << endl;
+    cout << "Comparisons : " << compare1 << " | " << compare2 << endl;
+    return;
 }
