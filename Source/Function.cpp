@@ -278,18 +278,9 @@ void printCMD3(short algoCode, int inputSize, short outputCode)
     }
 }
 
-void Compare_mode(string var, string algo1, string algo2, string inputOrder[], int& n, int cmd) {
-    short first_algo = -1;
-    short second_algo = -1;
-    KeySearch(algo1, listNameSort, 11, first_algo);
-    KeySearch(algo2, listNameSort, 11, second_algo);
-    if (first_algo == -1 || second_algo == -1) {
-        cout << "Invalid algorithms";
-        return;
-    }
+void Compare_mode(string var, int algo1, int algo2, string inputOrder[], int& n, int cmd) {
     int* arr = NULL;
     if (cmd == 4) {
-        int a;
         n = 0;
         ifstream read;
         read.open(var, ios::in);
@@ -303,7 +294,7 @@ void Compare_mode(string var, string algo1, string algo2, string inputOrder[], i
             read >> arr[i];
         }
         read.close();
-        cout << "Algorithm: " << algo1 << " | " << algo2 << endl;
+        cout << "Algorithm: " << lítNameSort[algo1] << " | " << listNameSort[algo2] << endl;
         cout << "Input file: " << var << endl;
         cout << "Input size: " << n << endl;
         cout << "---------------------------------" << endl;
@@ -318,12 +309,12 @@ void Compare_mode(string var, string algo1, string algo2, string inputOrder[], i
         }
         arr = new int[n];
         GenerateData(arr, n, order);
-        cout << "Algorithm: " << algo1 << " | " << algo2 << endl;
+        cout << "Algorithm: " << lítNameSort[algo1] << " | " << listNameSort[algo2] << endl;
         cout << "Input size: " << n << endl;
         cout << "Input order: " << var << endl;
         cout << "---------------------------------" << endl;
     }
-    printCMD45(arr, n, first_algo, second_algo);
+    printCMD45(arr, n, algo1, algo2);
 }
 
 void printCMD45(int* arr, int n, short algo1, short algo2)
