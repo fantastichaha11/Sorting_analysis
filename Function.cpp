@@ -278,7 +278,7 @@ void printCMD3(short algoCode, int inputSize, short outputCode)
     }
 }
 
-void Compare_mode(string var1, string var2, string algo1, string algo2, int& n, int cmd) {
+void Compare_mode(string var1, string var2, string algo1, string algo2, string inputOrder[], int& n, int cmd) {
     short first_algo = -1;
     short second_algo = -1;
     KeySearch(algo1, listNameSort, 11, first_algo);
@@ -312,7 +312,7 @@ void Compare_mode(string var1, string var2, string algo1, string algo2, int& n, 
     else if (cmd == 5) {
         //KeySearch for the order of sort
         short order = -1;
-        KeySearch(var2, listData, 4, order);
+        KeySearch(var2, inputOrder, 4, order);
         if (order == -1) {
             cout << "Invalid input order";
             return;
