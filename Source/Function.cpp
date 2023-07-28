@@ -297,8 +297,7 @@ void Compare_mode(string var, string algo1, string algo2, string inputOrder[], i
             cout << "Can not read " << var << endl;
             return;
         }
-        while (read >> a) n++;
-        read.seekg(0, ios::beg);
+	read >> n;
         arr = new int[n];
         for (int i = 0; i < n; i++) {
             read >> arr[i];
