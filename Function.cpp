@@ -268,9 +268,16 @@ bool KeySearch(string key, string arr[], int n, short& code)
     return false;
 }
 
-void readInputFile(string fileName, int*& a, int& n)
+bool readInputFile(string fileName, int*& a, int& n)
 {
     ifstream fp(fileName);
+
+    if (!fp.is_open())
+    {
+		cout << "Can't open file " << fileName << endl;
+		return false;
+	}
+
     fp >> n;
     if (a != NULL)
     {
@@ -282,6 +289,8 @@ void readInputFile(string fileName, int*& a, int& n)
         fp >> a[i];
     }
     fp.close();
+
+    return true;
 }
 
 void printResult(short orderCode, short outputCode, double time, long long count_compare)
@@ -305,22 +314,48 @@ void printCMD1(short algoCode, string fileName, short outputCode)
     double time = 0;
     long long count_compare = 0;
     pSort sort = listSort[algoCode];
-    sort(a, n, count_compare, time, outputCode);
-    readInputFile(fileName, a, n);
+    
+    if (readInputFile(fileName, a, n) == 0)
+    {
+        return;
+    }
+
     cout << "ALGORITHM MODE\n";
     cout << "Algorithm: " << listNameSort[algoCode] << endl;
     cout << "Input file: " << fileName << endl;
     cout << "Input size: " << n << endl;
     cout << "---------------------------------\n";
 
+    int* copy = new int[n];
     if (outputCode == TIME || outputCode == BOTH)
     {
-        cout << "Running time: " << time << endl;
+        duplicateArr(a, copy, n);
+
+        auto start = high_resolution_clock::now();
+        sort(copy, n, count_compare, time, TIME);
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+
+        cout << "Running time: " << duration.count() << " microseconds" << endl;
     }
     if (outputCode == COMPARE || outputCode == BOTH)
     {
+        duplicateArr(a, copy, n);
+
+        sort(copy, n, count_compare, time, COMPARE);
         cout << "Comparisons: " << count_compare << endl;
     }
+
+    ofstream fp("output.txt");
+
+	fp << n << endl;
+    for (int i = 0; i < n; i++)
+    {
+		fp << copy[i] << " ";
+	}
+	fp.close();
+
+    delete[] copy;
 }
 
 void printCMD2(short algoCode, int inputSize, short orderCode, short outputCode)
