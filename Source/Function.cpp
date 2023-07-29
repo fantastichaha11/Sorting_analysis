@@ -392,7 +392,7 @@ void Compare_mode(string var, int algo1, int algo2, string inputOrder[], int& n,
         print.close();
         cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
         cout << "Input size: " << n << endl;
-        cout << "Input order: " << var << endl;
+        cout << "Input order: " << listData[order] << endl;
         cout << "---------------------------------" << endl;
     }
     printCMD45(arr, n, algo1, algo2);
