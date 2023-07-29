@@ -406,14 +406,13 @@ void printCMD45(int* arr, int n, short algo1, short algo2)
     pSort sort1 = listSort[algo1];
     pSort sort2 = listSort[algo2];
     duplicateArr(arr, copy, n);
-
+    long long temp;
     //Calculate comparisons of the first sort algorithm
     sort1(copy, n, compare1, time1, COMPARE);
-
     //Calculate time of the first sort algorithm
     duplicateArr(arr, copy, n);
     auto start1 = high_resolution_clock::now();
-    sort1(copy, n, compare1, time1, TIME);
+    sort1(copy, n, temp, time1, TIME);
     auto stop1 = high_resolution_clock::now();
     auto duration1 = duration_cast<microseconds>(stop1 - start1);
 
@@ -424,7 +423,7 @@ void printCMD45(int* arr, int n, short algo1, short algo2)
     //Calculate time of the second sort algorithm
     duplicateArr(arr, copy, n);
     auto start2 = high_resolution_clock::now();
-    sort2(copy, n, compare2, time2, TIME);
+    sort2(copy, n, temp, time2, TIME);
     auto stop2 = high_resolution_clock::now();
     auto duration2 = duration_cast<microseconds>(stop2 - start2);
 

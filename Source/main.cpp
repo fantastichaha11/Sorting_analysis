@@ -29,7 +29,9 @@ void main_debug()
 {
 	/*outputSort(500000, RANDOM, BOTH, H_SORT, "An_Sorting.txt");*/
 	cout << "hello\n";
-
+	string var = "-sorted";
+	int n = 100;
+	Compare_mode(var, 2, 3, inputOrder, n, 5);
 	system("pause");
 }
 
