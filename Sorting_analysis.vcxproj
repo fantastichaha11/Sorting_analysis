@@ -129,19 +129,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DataGenerator.cpp" />
-    <ClCompile Include="Function.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="sorting_functions.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="DataGenerator.h" />
-    <ClInclude Include="Function.h" />
-    <ClInclude Include="sorting_functions.h" />
-  </ItemGroup>
-  <ItemGroup>
     <Text Include="An_Sorting.txt" />
     <Text Include="Kiet_Ascending.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\DataGenerator.cpp" />
+    <ClCompile Include="Source\Function.cpp" />
+    <ClCompile Include="Source\main.cpp" />
+    <ClCompile Include="Source\sorting_functions.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\DataGenerator.h" />
+    <ClInclude Include="Source\Function.h" />
+    <ClInclude Include="Source\sorting_functions.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

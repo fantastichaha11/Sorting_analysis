@@ -112,7 +112,7 @@ int main(int argc, char** argv)
 					if (strstr(argv[4], ".txt") != NULL)
 					{
 						int n = 0;
-						Compare_mode(argv[4], algoCode1, algoCode2, inputOrder, n, 4);
+						//Compare_mode(argv[4], algoCode1, algoCode2, inputOrder, n, 4);
 					}
 					else
 					{
@@ -120,7 +120,7 @@ int main(int argc, char** argv)
 						short orderCode;
 						if (KeySearch(argv[5], inputOrder, 4, orderCode))
 						{
-							Compare_mode(argv[5], algoCode1, algoCode2, inputOrder, argv[4], 5);
+							//Compare_mode(argv[5], algoCode1, algoCode2, inputOrder, argv[4], 5);
 						}
 						else
 						{
