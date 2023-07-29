@@ -1,4 +1,4 @@
-#include "sorting_functions.h"
+#include "SortingFunctions.h"
 
 //Selection Sort
 void selectionSort_countCompare(int* a, int n, long long& count_compare)

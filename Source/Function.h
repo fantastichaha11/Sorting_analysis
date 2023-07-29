@@ -1,5 +1,5 @@
 #pragma once
-#include "sorting_functions.h"
+#include "SortingFunctions.h"
 
 #define A_MODE 0
 #define C_MODE 1

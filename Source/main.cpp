@@ -1,5 +1,5 @@
 #include "Function.h"
-#include "sorting_functions.h"
+#include "SortingFunctions.h"
 #include <cstdlib>
 
 string mode[2] = { "-a", "-c" };
