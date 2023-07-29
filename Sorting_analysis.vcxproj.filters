@@ -21,6 +21,12 @@
     <Text Include="Kiet_Ascending.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="input.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="output.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\Function.cpp">

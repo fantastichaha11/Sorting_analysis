@@ -130,7 +130,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="An_Sorting.txt" />
+    <Text Include="input.txt" />
     <Text Include="Kiet_Ascending.txt" />
+    <Text Include="output.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\DataGenerator.cpp" />
