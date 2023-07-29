@@ -10,7 +10,7 @@ pSort listSort[11] = { selectionSort, insertionSort, bubbleSort, shakerSort, she
 string listNameSort[11] = { "Selection Sort", "Insertion Sort", "Bubble Sort", "Shaker Sort", "Shell Sort", "Heap Sort",
                             "Merge Sort", "Quick Sort", "Counting Sort", "Radix Sort", "Flash Sort" };
 int listSize[6] = { 10000, 30000, 50000, 100000, 300000, 500000 };
-string listData[4] = { "Random", "Sorted", "Reverse", "Nearly Sorted" };
+string listData[4] = { "Random", "Nearly Sorted", "Sorted", "Reverse" };
 
 void outputSort(int n, int typeData, int typeCount, int typeSort, string filename)
 {
@@ -242,6 +242,20 @@ void printCMD1(short algoCode, string fileName, short outputCode)
 	fp.close();
 
     delete[] copy;
+    delete[] a;
+}
+
+void writeDowndArray(int* a, int n, string fileName)
+{
+    ofstream fp(fileName);
+
+    fp << n << endl;
+    for (int i = 0; i < n; i++)
+    {
+        fp << a[i] << " ";
+    }
+    fp.close();
+
 }
 
 void printCMD2(short algoCode, int inputSize, short orderCode, short outputCode)
@@ -252,11 +266,39 @@ void printCMD2(short algoCode, int inputSize, short orderCode, short outputCode)
     long long count_compare = 0;
     pSort sort = listSort[algoCode];
     GenerateData(a, n, orderCode);
-    sort(a, n, count_compare, time, outputCode);
+
+    writeDowndArray(a, n, "input.txt");
+
     cout << "ALGORITHM MODE\n";
     cout << "Algorithm: " << listNameSort[algoCode] << endl;
     cout << "Input size: " << n << endl;
-    printResult(orderCode, outputCode, time, count_compare);
+    cout << "Input order: " << listData[orderCode] << endl;
+    cout << "---------------------------------\n";
+
+    int* copy = new int[n];
+    if (outputCode == TIME || outputCode == BOTH)
+    {
+        duplicateArr(a, copy, n);
+
+        auto start = high_resolution_clock::now();
+        sort(copy, n, count_compare, time, TIME);
+        auto stop = high_resolution_clock::now();
+        auto duration = duration_cast<microseconds>(stop - start);
+
+        cout << "Running time: " << duration.count() << " microseconds" << endl;
+    }
+    if (outputCode == COMPARE || outputCode == BOTH)
+    {
+        duplicateArr(a, copy, n);
+
+        sort(copy, n, count_compare, time, COMPARE);
+        cout << "Comparisons: " << count_compare << endl;
+    }
+
+    writeDowndArray(copy, n, "output.txt");
+
+    delete[] copy;
+    delete[] a;
 }
 
 void printCMD3(short algoCode, int inputSize, short outputCode)
@@ -267,29 +309,49 @@ void printCMD3(short algoCode, int inputSize, short outputCode)
     cout << "Input size: " << inputSize << endl;
     for (int i = 0; i < 4; i++)
     {
+        cout << "Input order: " << listData[i] << endl;
+        cout << "---------------------------------\n";
         int* a = NULL;
         int n = inputSize;
         double time = 0;
         long long count_compare = 0;
         GenerateData(a, n, i);
-        sort(a, n, count_compare, time, outputCode);
-        printResult(i, outputCode, time, count_compare);
+
+        string fileName = "input_" + to_string(i + 1) + ".txt";
+        writeDowndArray(a, n, fileName);
+
+
+        int* copy = new int[n];
+        if (outputCode == TIME || outputCode == BOTH)
+        {
+            duplicateArr(a, copy, n);
+
+            auto start = high_resolution_clock::now();
+            sort(copy, n, count_compare, time, TIME);
+            auto stop = high_resolution_clock::now();
+            auto duration = duration_cast<microseconds>(stop - start);
+
+            cout << "Running time: " << duration.count() << " microseconds" << endl;
+        }
+        if (outputCode == COMPARE || outputCode == BOTH)
+        {
+            duplicateArr(a, copy, n);
+
+            sort(copy, n, count_compare, time, COMPARE);
+            cout << "Comparisons: " << count_compare << endl;
+        }
+
         cout << endl;
+        delete[] copy;
+        delete[] a;
     }
+
+
 }
 
-void Compare_mode(string var, string algo1, string algo2, string inputOrder[], int& n, int cmd) {
-    short first_algo = -1;
-    short second_algo = -1;
-    KeySearch(algo1, listNameSort, 11, first_algo);
-    KeySearch(algo2, listNameSort, 11, second_algo);
-    if (first_algo == -1 || second_algo == -1) {
-        cout << "Invalid algorithms";
-        return;
-    }
+void Compare_mode(string var, int algo1, int algo2, string inputOrder[], int& n, int cmd) {
     int* arr = NULL;
     if (cmd == 4) {
-        int a;
         n = 0;
         ifstream read;
         read.open(var, ios::in);
@@ -297,20 +359,18 @@ void Compare_mode(string var, string algo1, string algo2, string inputOrder[], i
             cout << "Can not read " << var << endl;
             return;
         }
-        while (read >> a) n++;
-        read.seekg(0, ios::beg);
+	read >> n;
         arr = new int[n];
         for (int i = 0; i < n; i++) {
             read >> arr[i];
         }
         read.close();
-        cout << "Algorithm: " << algo1 << " | " << algo2 << endl;
+        cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
         cout << "Input file: " << var << endl;
         cout << "Input size: " << n << endl;
         cout << "---------------------------------" << endl;
     }
     else if (cmd == 5) {
-        //KeySearch for the order of sort
         short order = -1;
         KeySearch(var, inputOrder, 4, order);
         if (order == -1) {
@@ -319,12 +379,23 @@ void Compare_mode(string var, string algo1, string algo2, string inputOrder[], i
         }
         arr = new int[n];
         GenerateData(arr, n, order);
-        cout << "Algorithm: " << algo1 << " | " << algo2 << endl;
+        ofstream print;
+        print.open("input.txt", ios::out);
+        if (print.fail()) {
+            cout << "Can not read input.txt";
+            return;
+        }
+        print << n << endl;
+        for (int i = 0; i < n; i++) {
+            print << arr[i] << " ";
+        }
+        print.close();
+        cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
         cout << "Input size: " << n << endl;
         cout << "Input order: " << var << endl;
         cout << "---------------------------------" << endl;
     }
-    printCMD45(arr, n, first_algo, second_algo);
+    printCMD45(arr, n, algo1, algo2);
 }
 
 void printCMD45(int* arr, int n, short algo1, short algo2)
