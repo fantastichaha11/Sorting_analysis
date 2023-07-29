@@ -23,9 +23,6 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Source\DataGenerator.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\Function.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,6 +30,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Source\sorting_functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\DataGenerator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
