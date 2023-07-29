@@ -14,6 +14,6 @@ void printResult(short orderCode, short outputCode, double time, long long count
 void printCMD1(short algoCode, string fileName, short outputCode);
 void printCMD2(short algoCode, int inputSize, short orderCode, short outputCode);
 void printCMD3(short algoCode, int inputSize, short outputCode);
-void Compare_mode(string var, string algo1, string algo2, string inputOrder[], int& n, int cmd);
+void Compare_mode(string var, int algo1, int algo2, string inputOrder[], int& n, int cmd);
 void printCMD45(int* arr, int n, short algo1, short algo2);
 void writeDowndArray(int* a, int n, string fileName);

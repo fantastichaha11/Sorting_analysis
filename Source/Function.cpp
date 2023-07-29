@@ -371,7 +371,6 @@ void Compare_mode(string var, int algo1, int algo2, string inputOrder[], int& n,
         cout << "---------------------------------" << endl;
     }
     else if (cmd == 5) {
-        //KeySearch for the order of sort
         short order = -1;
         KeySearch(var, inputOrder, 4, order);
         if (order == -1) {
@@ -380,6 +379,17 @@ void Compare_mode(string var, int algo1, int algo2, string inputOrder[], int& n,
         }
         arr = new int[n];
         GenerateData(arr, n, order);
+        ofstream print;
+        print.open("input.txt", ios::out);
+        if (print.fail()) {
+            cout << "Can not read input.txt";
+            return;
+        }
+        print << n << endl;
+        for (int i = 0; i < n; i++) {
+            print << arr[i] << " ";
+        }
+        print.close();
         cout << "Algorithm: " << listNameSort[algo1] << " | " << listNameSort[algo2] << endl;
         cout << "Input size: " << n << endl;
         cout << "Input order: " << var << endl;
