@@ -120,7 +120,7 @@ int main(int argc, char** argv)
 						short orderCode;
 						if (KeySearch(argv[5], inputOrder, 4, orderCode))
 						{
-							//Compare_mode(argv[5], algoCode1, algoCode2, inputOrder, argv[4], 5);
+							//Compare_mode(argv[5], algoCode1, algoCode2, inputSize, 5);
 						}
 						else
 						{
